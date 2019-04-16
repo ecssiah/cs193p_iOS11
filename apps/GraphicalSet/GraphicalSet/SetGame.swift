@@ -1,6 +1,6 @@
 //
 //  SetGame.swift
-//  Set
+//  GraphicalSet
 //
 //  Created by Michael Chapman on 4/12/19.
 //  Copyright © 2019 Gauge Structures. All rights reserved.

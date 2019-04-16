@@ -42,7 +42,7 @@
 		7B24EACD226169C9004F4F70 = {
 			isa = PBXGroup;
 			children = (
-				7B24EAD8226169C9004F4F70 /* Set */,
+				7B24EAD8226169C9004F4F70 /* GraphicalSet */,
 				7B24EAD7226169C9004F4F70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,7 +55,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7B24EAD8226169C9004F4F70 /* Set */ = {
+		7B24EAD8226169C9004F4F70 /* GraphicalSet */ = {
 			isa = PBXGroup;
 			children = (
 				7B24EAD9226169C9004F4F70 /* AppDelegate.swift */,
@@ -67,7 +67,7 @@
 				7BC929972261713B006664BD /* SetGame.swift */,
 				7B24EAE5226169CC004F4F70 /* Info.plist */,
 			);
-			path = Set;
+			path = GraphicalSet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,12 +292,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKWB93NN4T;
-				INFOPLIST_FILE = Set/Info.plist;
+				INFOPLIST_FILE = GraphicalSet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.Set;
+				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.GraphicalSet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -310,12 +310,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKWB93NN4T;
-				INFOPLIST_FILE = Set/Info.plist;
+				INFOPLIST_FILE = GraphicalSet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.Set;
+				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.GraphicalSet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
