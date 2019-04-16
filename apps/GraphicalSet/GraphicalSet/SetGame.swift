@@ -10,7 +10,12 @@ import Foundation
 
 struct SetGame
 {
-    let numCards = 24
+    enum User {
+        case human
+        case siri
+    }
+    
+    private let numCards = 24
 
     private(set) var playerScore = 0
     private(set) var siriScore = 0
@@ -48,7 +53,7 @@ struct SetGame
         return false
     }
     
-    mutating func resetDeck() {
+    mutating private func resetDeck() {
         cardsInDeck.removeAll()
         cardsInPlay.removeAll()
         
@@ -67,7 +72,7 @@ struct SetGame
         }
     }
     
-    func findSet() -> (Card, Card, Card)? {
+    private func findSet() -> (Card, Card, Card)? {
         for idx1 in cardsInPlay.indices {
             for idx2 in (idx1 + 1)..<cardsInPlay.count {
                 for idx3 in (idx2 + 1)..<cardsInPlay.count {
@@ -121,24 +126,17 @@ struct SetGame
         lastPlayerMoveTime = DispatchTime.now()
     }
     
-    mutating func getPlayerSpeedBonus() -> Int {
-        let elapsed = Double(DispatchTime.now().rawValue - lastPlayerMoveTime.rawValue) / 1e+9
+    mutating func getSpeedBonus(for user: User) -> Int {
+        var elapsed: Double
+        let now = DispatchTime.now()
         
-        lastPlayerMoveTime = DispatchTime.now()
-        
-        if elapsed < 10 {
-            return 2
-        } else if elapsed < 20 {
-            return 1
+        if user == User.human {
+            elapsed = Double(now.rawValue - lastPlayerMoveTime.rawValue) / 1e+9
+            lastPlayerMoveTime = now
         } else {
-            return 0
+            elapsed = Double(now.rawValue - lastSiriMoveTime.rawValue) / 1e+9
+            lastSiriMoveTime = now
         }
-    }
-    
-    mutating func getSiriSpeedBonus() -> Int {
-        let elapsed = Double(DispatchTime.now().rawValue - lastSiriMoveTime.rawValue) / 1e+9
-        
-        lastSiriMoveTime = DispatchTime.now()
         
         if elapsed < 10 {
             return 2
@@ -165,7 +163,6 @@ struct SetGame
     
     mutating func chooseCard(card: Card) {
         if selectedCards.contains(card) {
-            playerScore -= 1
             selectedCards.remove(at: selectedCards.firstIndex(of: card)!)
         } else {
             selectedCards.append(card)
@@ -184,7 +181,7 @@ struct SetGame
         )
         
         if completeSet {
-            playerScore += 3 + getPlayerSpeedBonus() + getCardBonus()
+            playerScore += 3 + getSpeedBonus(for: User.human) + getCardBonus()
             
             cardsInPlay = cardsInPlay.filter({(card: Card) in
                 let matchFirst = card != selectedCards[0]
@@ -232,11 +229,11 @@ struct SetGame
         return Set([first, second, third]).count != 2
     }
     
-    mutating func makeSiriMove() {
+    mutating func siriMove() {
         lastSiriMoveTime = DispatchTime.now()
         
         if let foundSet = findSet() {
-            siriScore += 3 + getCardBonus() + getSiriSpeedBonus()
+            siriScore += 3 + getCardBonus() + getSpeedBonus(for: User.siri)
             
             cardsInPlay = cardsInPlay.filter({(card: Card) in
                 let matchFirst = card != foundSet.0

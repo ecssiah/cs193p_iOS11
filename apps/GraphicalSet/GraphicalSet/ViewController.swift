@@ -19,11 +19,15 @@ class ViewController: UIViewController {
     
     private var game = SetGame()
     
-    @IBOutlet weak var playerScoreLabel: UILabel!
-    @IBOutlet weak var siriScoreLabel: UILabel!
-    @IBOutlet weak var siriAvatarButton: UIButton!
+    @IBOutlet
+    weak var playerScoreLabel: UILabel!
+    @IBOutlet
+    weak var siriScoreLabel: UILabel!
+    @IBOutlet
+    weak var siriAvatarButton: UIButton!
     
-    @IBOutlet private var cardButtons: [UIButton]! {
+    @IBOutlet
+    private var cardButtons: [UIButton]! {
         didSet {
             for index in cardButtons.indices {
                 cardButtons[index].layer.cornerRadius = 12
@@ -33,7 +37,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet private weak var dealButton: UIButton! {
+    @IBOutlet
+    private weak var dealButton: UIButton! {
         didSet {
             dealButton.layer.cornerRadius = 12
             dealButton.layer.borderWidth = 2
@@ -43,7 +48,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var newGameButton: UIButton! {
+    @IBOutlet
+    weak var newGameButton: UIButton! {
         didSet {
             newGameButton.layer.cornerRadius = 12
             newGameButton.layer.borderWidth = 2
@@ -51,7 +57,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func deal(_ sender: UIButton) {
+    @IBAction
+    private func deal(_ sender: UIButton) {
         game.calculateDealingPenalty()
         
         for _ in 1...3 {
@@ -70,7 +77,8 @@ class ViewController: UIViewController {
         updateView()
     }
     
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBAction
+    private func newGame(_ sender: UIButton) {
         game.newGame()
         
         siriActive = false
@@ -82,7 +90,20 @@ class ViewController: UIViewController {
         updateView()
     }
     
-    @IBAction func siriAvatarAction(_ sender: UIButton) {
+    @IBAction
+    private func touchCard(_ sender: UIButton) {
+        if let index = cardButtons.firstIndex(of: sender) {
+            if let slot = cardSlots[index] {
+                game.chooseCard(card: slot)
+                cleanupBoard()
+            }
+        } else {
+            print("card is not in collection")
+        }
+    }
+    
+    @IBAction
+    private func siriAvatarAction(_ sender: UIButton) {
         if siriActive {
             siriActive = false
             siriTimer.invalidate()
@@ -91,11 +112,6 @@ class ViewController: UIViewController {
             siriActive = true
             startSiri()
         }
-    }
-    
-    override func viewDidLoad() {
-        setBoard()
-        updateView()
     }
     
     private func startSiri() {
@@ -122,7 +138,7 @@ class ViewController: UIViewController {
     }
     
     private func siriChoice(timer: Timer) {
-        game.makeSiriMove()
+        game.siriMove()
         
         if (game.over) {
             if game.siriScore > game.playerScore {
@@ -143,16 +159,6 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction private func touchCard(_ sender: UIButton) {
-        if let index = cardButtons.firstIndex(of: sender) {
-            if let slot = cardSlots[index] {
-                game.chooseCard(card: slot)
-                cleanupBoard()
-            }
-        } else {
-            print("card is not in collection")
-        }
-    }
     
     private func setBoard() {
         cardSlots.removeAll()
@@ -166,7 +172,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func cleanupBoard() {
+    private func cleanupBoard() {
         for index in cardSlots.indices {
             if let card = cardSlots[index], !game.cardsInPlay.contains(card) {
                 cardSlots[index] = nil
@@ -176,7 +182,7 @@ class ViewController: UIViewController {
         updateView()
     }
     
-    func updateView() {
+    private func updateView() {
         playerScoreLabel.text = "Player: \(game.playerScore)"
         
         if game.over || game.full || game.deckEmpty {
@@ -242,11 +248,18 @@ class ViewController: UIViewController {
                 }
                 
                 button.setAttributedTitle(
-                    NSAttributedString(string: shapeString, attributes: attributes),
+                    NSAttributedString(
+                        string: shapeString, attributes: attributes
+                    ),
                     for: UIControl.State.normal
                 )
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        setBoard()
+        updateView()
     }
 }
 
