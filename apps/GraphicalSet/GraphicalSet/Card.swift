@@ -9,8 +9,14 @@
 import Foundation
 
 struct Card : Equatable {
-    let shape: Int
-    let style: Int
-    let color: Int
-    let number: Int
+    enum Variant : CaseIterable {
+        case v1
+        case v2
+        case v3
+    }
+    
+    let feature1: Variant
+    let feature2: Variant
+    let feature3: Variant
+    let feature4: Variant
 }

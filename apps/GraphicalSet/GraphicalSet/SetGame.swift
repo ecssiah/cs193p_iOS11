@@ -54,12 +54,10 @@ struct SetGame
     }
     
     mutating private func resetDeck() {
-        cardsInDeck.removeAll()
+        selectedCards.removeAll()
         cardsInPlay.removeAll()
         
         createDeck()
-
-        selectedCards.removeAll()
     }
     
     mutating func resetSiri() {
@@ -95,15 +93,17 @@ struct SetGame
     }
     
     mutating private func createDeck() {
-        for shape in 0...2 {
-            for style in 0...2 {
-                for color in 0...2 {
-                    for number in 1...3 {
+        cardsInDeck.removeAll()
+        
+        for feature1 in Card.Variant.allCases {
+            for feature2 in Card.Variant.allCases {
+                for feature3 in Card.Variant.allCases {
+                    for feature4 in Card.Variant.allCases {
                         let card = Card(
-                            shape: shape,
-                            style: style,
-                            color: color,
-                            number: number
+                            feature1: feature1,
+                            feature2: feature2,
+                            feature3: feature3,
+                            feature4: feature4
                         )
                         
                         cardsInDeck += [card]
@@ -119,9 +119,7 @@ struct SetGame
         
         resetDeck()
         
-        for _ in 1...12 {
-            deal()
-        }
+        deal(thisMany: 18)
         
         lastPlayerMoveTime = DispatchTime.now()
     }
@@ -197,7 +195,6 @@ struct SetGame
         selectedCards.removeAll()
     }
     
-    @discardableResult
     mutating func deal() -> Card {
         let card = cardsInDeck.remove(
             at: Int(arc4random_uniform(UInt32(cardsInDeck.count)))
@@ -208,24 +205,48 @@ struct SetGame
         return card
     }
     
-    func makesSet(first: Card, second: Card, third: Card) -> Bool {
-        let shapeSet = traitCheck(
-            first: first.shape, second: second.shape, third: third.shape
-        )
-        let colorSet = traitCheck(
-            first: first.color, second: second.color, third: third.color
-        )
-        let styleSet = traitCheck(
-            first: first.style, second: second.style, third: third.style
-        )
-        let numberSet = traitCheck(
-            first: first.number, second: second.number, third: third.number
-        )
-
-        return shapeSet && colorSet && styleSet && numberSet
+    mutating func deal(thisMany numCards: Int) {
+        for _ in 1...numCards {
+            if cardsInDeck.count == 0 {
+                break
+            }
+            
+            let card = cardsInDeck.remove(
+                at: Int(arc4random_uniform(UInt32(cardsInDeck.count)))
+            )
+            
+            cardsInPlay.append(card)
+        }
     }
     
-    func traitCheck(first: Int, second: Int, third: Int) -> Bool {
+    func makesSet(first: Card, second: Card, third: Card) -> Bool {
+        let feature1Set = traitCheck(
+            first: first.feature1,
+            second: second.feature1,
+            third: third.feature1
+        )
+        let feature2Set = traitCheck(
+            first: first.feature2,
+            second: second.feature2,
+            third: third.feature2
+        )
+        let feature3Set = traitCheck(
+            first: first.feature3,
+            second: second.feature3,
+            third: third.feature3
+        )
+        let feature4Set = traitCheck(
+            first: first.feature4,
+            second: second.feature4,
+            third: third.feature4
+        )
+
+        return feature1Set && feature2Set && feature3Set && feature4Set
+    }
+    
+    func traitCheck(
+        first: Card.Variant, second: Card.Variant, third: Card.Variant
+    ) -> Bool {
         return Set([first, second, third]).count != 2
     }
     

@@ -12,6 +12,8 @@
 		7B24EADF226169C9004F4F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B24EADD226169C9004F4F70 /* Main.storyboard */; };
 		7B24EAE1226169CC004F4F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B24EAE0226169CC004F4F70 /* Assets.xcassets */; };
 		7B24EAE4226169CC004F4F70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B24EAE2226169CC004F4F70 /* LaunchScreen.storyboard */; };
+		7BAFE63A22679C70004E7D34 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFE63922679C70004E7D34 /* Grid.swift */; };
+		7BBFD77E22667E5200956A4F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBFD77D22667E5200956A4F /* CardView.swift */; };
 		7BC9299622617122006664BD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9299522617122006664BD /* Card.swift */; };
 		7BC929982261713B006664BD /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC929972261713B006664BD /* SetGame.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +26,8 @@
 		7B24EAE0226169CC004F4F70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B24EAE3226169CC004F4F70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B24EAE5226169CC004F4F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BAFE63922679C70004E7D34 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		7BBFD77D22667E5200956A4F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7BC9299522617122006664BD /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		7BC929972261713B006664BD /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +62,8 @@
 		7B24EAD8226169C9004F4F70 /* GraphicalSet */ = {
 			isa = PBXGroup;
 			children = (
+				7BAFE63922679C70004E7D34 /* Grid.swift */,
+				7BBFD77D22667E5200956A4F /* CardView.swift */,
 				7B24EAD9226169C9004F4F70 /* AppDelegate.swift */,
 				7B24EADB226169C9004F4F70 /* ViewController.swift */,
 				7B24EADD226169C9004F4F70 /* Main.storyboard */,
@@ -144,7 +150,9 @@
 				7B24EADC226169C9004F4F70 /* ViewController.swift in Sources */,
 				7BC9299622617122006664BD /* Card.swift in Sources */,
 				7BC929982261713B006664BD /* SetGame.swift in Sources */,
+				7BBFD77E22667E5200956A4F /* CardView.swift in Sources */,
 				7B24EADA226169C9004F4F70 /* AppDelegate.swift in Sources */,
+				7BAFE63A22679C70004E7D34 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,16 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let numSlots = 24
-    private let shapes = ["▲", "●", "■"]
-    
-    private var siriTimer = Timer()
     private var siriActive = false
-    
-    private lazy var cardSlots = [Card?]()
+    private var siriTimer = Timer()
     
     private var game = SetGame()
-    
+    private var grid = Grid(layout: Grid.Layout.aspectRatio(CGFloat(6.0/8.0)))
+
     @IBOutlet
     weak var playerScoreLabel: UILabel!
     @IBOutlet
@@ -27,24 +23,18 @@ class ViewController: UIViewController {
     weak var siriAvatarButton: UIButton!
     
     @IBOutlet
-    private var cardButtons: [UIButton]! {
+    weak var cardAreaView: UIView! {
         didSet {
-            for index in cardButtons.indices {
-                cardButtons[index].layer.cornerRadius = 12
-                cardButtons[index].titleLabel?.textAlignment = NSTextAlignment.center
-                cardButtons[index].titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-            }
-        }
-    }
-    
-    @IBOutlet
-    private weak var dealButton: UIButton! {
-        didSet {
-            dealButton.layer.cornerRadius = 12
-            dealButton.layer.borderWidth = 2
-            dealButton.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-            dealButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControl.State.normal)
-            dealButton.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: UIControl.State.disabled)
+            let swipe = UISwipeGestureRecognizer(
+                target: self, action: #selector(deal)
+            )
+            swipe.direction = .down
+            cardAreaView.addGestureRecognizer(swipe)
+            
+            let rotate = UIRotationGestureRecognizer(
+                target: self, action: #selector(rotateCards(recognizedBy:))
+            )
+            cardAreaView.addGestureRecognizer(rotate)
         }
     }
     
@@ -57,24 +47,69 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction
-    private func deal(_ sender: UIButton) {
-        game.calculateDealingPenalty()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        for _ in 1...3 {
-            let card = game.deal()
+        updateCardAreaView()
+        updateView()
+    }
+
+    override func viewDidLayoutSubviews() {
+        grid.frame = cardAreaView.bounds
+        
+        for index in cardAreaView.subviews.indices {
+            let cardView = cardAreaView.subviews[index]
             
-            for index in cardSlots.indices {
-                let slot = cardSlots[index]
-                
-                if slot == nil {
-                    cardSlots[index] = card
-                    break
-                }
+            if let cardViewFrame = grid[index] {
+                cardView.frame = cardViewFrame
             }
         }
+    }
+    
+    func updateCardAreaView() {
+        for view in cardAreaView.subviews {
+            view.removeFromSuperview()
+        }
         
-        updateView()
+        grid.frame = cardAreaView.bounds
+        grid.cellCount = game.cardsInPlay.count
+        
+        for index in game.cardsInPlay.indices {
+            if let frame = grid[index] {
+                let cardView = CardView(frame: frame)
+                cardView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                cardView.layer.borderWidth = 1
+                cardView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                
+                let card = game.cardsInPlay[index]
+                
+                switch card.feature1 {
+                case Card.Variant.v1: cardView.shape = CardView.Shape.diamond
+                case Card.Variant.v2: cardView.shape = CardView.Shape.oval
+                case Card.Variant.v3: cardView.shape = CardView.Shape.squiggle
+                }
+                
+                switch card.feature2 {
+                case Card.Variant.v1: cardView.style = CardView.Style.solid
+                case Card.Variant.v2: cardView.style = CardView.Style.striped
+                case Card.Variant.v3: cardView.style = CardView.Style.unfilled
+                }
+                
+                switch card.feature3 {
+                case Card.Variant.v1: cardView.color = CardView.Color.green
+                case Card.Variant.v2: cardView.color = CardView.Color.purple
+                case Card.Variant.v3: cardView.color = CardView.Color.red
+                }
+                
+                switch card.feature4 {
+                case Card.Variant.v1: cardView.number = CardView.Number.one
+                case Card.Variant.v2: cardView.number = CardView.Number.two
+                case Card.Variant.v3: cardView.number = CardView.Number.three
+                }
+                
+                cardAreaView.addSubview(cardView)
+            }
+        }
     }
     
     @IBAction
@@ -86,20 +121,7 @@ class ViewController: UIViewController {
         siriAvatarButton.setTitle("😴", for: UIControl.State.normal)
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
-        setBoard()
         updateView()
-    }
-    
-    @IBAction
-    private func touchCard(_ sender: UIButton) {
-        if let index = cardButtons.firstIndex(of: sender) {
-            if let slot = cardSlots[index] {
-                game.chooseCard(card: slot)
-                cleanupBoard()
-            }
-        } else {
-            print("card is not in collection")
-        }
     }
     
     @IBAction
@@ -112,6 +134,20 @@ class ViewController: UIViewController {
             siriActive = true
             startSiri()
         }
+    }
+    
+    @objc
+    private func deal() {
+        game.deal(thisMany: 3)
+        updateCardAreaView()
+        updateView()
+    }
+    
+    @objc
+    private func rotateCards(
+        recognizedBy recognizer: UIRotationGestureRecognizer
+    ) {
+
     }
     
     private func startSiri() {
@@ -154,31 +190,7 @@ class ViewController: UIViewController {
         
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
-        cleanupBoard()
-        updateView()
-    }
-
-    
-    
-    private func setBoard() {
-        cardSlots.removeAll()
-        
-        for card in game.cardsInPlay {
-            cardSlots.append(card)
-        }
-        
-        while cardSlots.count < numSlots {
-            cardSlots.append(nil)
-        }
-    }
-    
-    private func cleanupBoard() {
-        for index in cardSlots.indices {
-            if let card = cardSlots[index], !game.cardsInPlay.contains(card) {
-                cardSlots[index] = nil
-            }
-        }
-        
+//        cleanupBoard()
         updateView()
     }
     
@@ -186,80 +198,77 @@ class ViewController: UIViewController {
         playerScoreLabel.text = "Player: \(game.playerScore)"
         
         if game.over || game.full || game.deckEmpty {
-            dealButton.isEnabled = false
+            // TODO: disable deal
         } else {
-            dealButton.isEnabled = true
+            // TODO: enable deal
         }
         
-        for index in cardSlots.indices {
-            let slot = cardSlots[index]
-            let button = cardButtons[index]
-                        
-            if slot == nil {
-                button.layer.borderWidth = 0.0
-                button.setTitle(nil, for: UIControl.State.normal)
-                button.setAttributedTitle(nil, for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            } else {
-                let card = slot!
-                
-                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                
-                if game.selectedCards.contains(card) {
-                    button.layer.borderWidth = 4.0
-                    button.layer.borderColor = #colorLiteral(red: 0, green: 0.9344006181, blue: 0.8458675742, alpha: 1)
-                } else {
-                    button.layer.borderWidth = 0.0
-                }
-                
-                var strokeWidth: Double
-                var cardColor: UIColor
-                var foregroundColor: UIColor
-                
-                if card.color == 0 {
-                    cardColor = #colorLiteral(red: 0.3988213539, green: 0.2490597665, blue: 0.7633544207, alpha: 1)
-                } else if card.color == 1 {
-                    cardColor = #colorLiteral(red: 0.7223100066, green: 0.1986979246, blue: 0.4815690517, alpha: 1)
-                } else {
-                    cardColor = #colorLiteral(red: 0, green: 0.5941582322, blue: 0.3905805945, alpha: 1)
-                }
-                
-                if card.style == 0 {
-                    strokeWidth = -1
-                    foregroundColor = cardColor.withAlphaComponent(0.40)
-                } else if card.style == 1 {
-                    strokeWidth = -1
-                    foregroundColor = cardColor.withAlphaComponent(1.00)
-                } else {
-                    strokeWidth = 6
-                    foregroundColor = cardColor.withAlphaComponent(0.00)
-                }
-                
-                let attributes: [NSAttributedString.Key : Any] = [
-                    .strokeColor: cardColor,
-                    .foregroundColor: foregroundColor,
-                    .strokeWidth: strokeWidth,
-                    .font: UIFont.systemFont(ofSize: 26),
-                ]
-                
-                var shapeString = ""
-                for _ in 1...card.number {
-                    shapeString += shapes[card.shape]
-                }
-                
-                button.setAttributedTitle(
-                    NSAttributedString(
-                        string: shapeString, attributes: attributes
-                    ),
-                    for: UIControl.State.normal
-                )
-            }
-        }
+//        for index in cardSlots.indices {
+//            let slot = cardSlots[index]
+//            let button = cardButtons[index]
+//
+//            if slot == nil {
+//                button.layer.borderWidth = 0.0
+//                button.setTitle(nil, for: UIControl.State.normal)
+//                button.setAttributedTitle(nil, for: UIControl.State.normal)
+//                button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+//            } else {
+//                let card = slot!
+//
+//                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//
+//                if game.selectedCards.contains(card) {
+//                    button.layer.borderWidth = 4.0
+//                    button.layer.borderColor = #colorLiteral(red: 0, green: 0.9344006181, blue: 0.8458675742, alpha: 1)
+//                } else {
+//                    button.layer.borderWidth = 0.0
+//                }
+//
+//                var strokeWidth: Double
+//                var cardColor: UIColor
+//                var foregroundColor: UIColor
+//
+//                if card.color == 0 {
+//                    cardColor = #colorLiteral(red: 0.3988213539, green: 0.2490597665, blue: 0.7633544207, alpha: 1)
+//                } else if card.color == 1 {
+//                    cardColor = #colorLiteral(red: 0.7223100066, green: 0.1986979246, blue: 0.4815690517, alpha: 1)
+//                } else {
+//                    cardColor = #colorLiteral(red: 0, green: 0.5941582322, blue: 0.3905805945, alpha: 1)
+//                }
+//
+//                if card.style == 0 {
+//                    strokeWidth = -1
+//                    foregroundColor = cardColor.withAlphaComponent(0.40)
+//                } else if card.style == 1 {
+//                    strokeWidth = -1
+//                    foregroundColor = cardColor.withAlphaComponent(1.00)
+//                } else {
+//                    strokeWidth = 6
+//                    foregroundColor = cardColor.withAlphaComponent(0.00)
+//                }
+//
+//                let attributes: [NSAttributedString.Key : Any] = [
+//                    .strokeColor: cardColor,
+//                    .foregroundColor: foregroundColor,
+//                    .strokeWidth: strokeWidth,
+//                    .font: UIFont.systemFont(ofSize: 26),
+//                ]
+//
+//                var shapeString = ""
+//                for _ in 1...card.number {
+//                    shapeString += shapes[card.shape]
+//                }
+//
+//                button.setAttributedTitle(
+//                    NSAttributedString(
+//                        string: shapeString, attributes: attributes
+//                    ),
+//                    for: UIControl.State.normal
+//                )
+//            }
+//        }
     }
     
-    override func viewDidLoad() {
-        setBoard()
-        updateView()
-    }
+    
 }
 
