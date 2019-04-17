@@ -8,7 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CardTapGestureRecognizer : UITapGestureRecognizer
+{
+    let card: Card
+    
+    init(target: Any?, action: Selector?, card: Card) {
+        self.card = card
+
+        super.init(target: target, action: action)
+    }
+}
+
+class ViewController: UIViewController
+{
     private var siriActive = false
     private var siriTimer = Timer()
     
@@ -61,7 +73,9 @@ class ViewController: UIViewController {
             let cardView = cardAreaView.subviews[index]
             
             if let cardViewFrame = grid[index] {
-                cardView.frame = cardViewFrame
+                cardView.frame = cardViewFrame.insetBy(
+                    dx: CardView.inset, dy: CardView.inset
+                )
             }
         }
     }
@@ -76,12 +90,16 @@ class ViewController: UIViewController {
         
         for index in game.cardsInPlay.indices {
             if let frame = grid[index] {
-                let cardView = CardView(frame: frame)
-                cardView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                cardView.layer.borderWidth = 1
-                cardView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-                
                 let card = game.cardsInPlay[index]
+                
+                let cardView = CardView(
+                    frame: frame.insetBy(dx: CardView.inset, dy: CardView.inset)
+                )
+                cardView.card = card
+                cardView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                
+                cardView.layer.cornerRadius = 12
+                cardView.layer.masksToBounds = true
                 
                 switch card.feature1 {
                 case Card.Variant.v1: cardView.shape = CardView.Shape.diamond
@@ -106,6 +124,11 @@ class ViewController: UIViewController {
                 case Card.Variant.v2: cardView.number = CardView.Number.two
                 case Card.Variant.v3: cardView.number = CardView.Number.three
                 }
+                
+                let tap = CardTapGestureRecognizer(
+                    target: self, action: #selector(touchCard), card: card
+                )
+                cardView.addGestureRecognizer(tap)
                 
                 cardAreaView.addSubview(cardView)
             }
@@ -139,7 +162,15 @@ class ViewController: UIViewController {
     @objc
     private func deal() {
         game.deal(thisMany: 3)
+        
         updateCardAreaView()
+        updateView()
+    }
+    
+    @objc
+    private func touchCard(sender: CardTapGestureRecognizer) {
+        game.chooseCard(sender.card)
+        
         updateView()
     }
     
@@ -147,7 +178,9 @@ class ViewController: UIViewController {
     private func rotateCards(
         recognizedBy recognizer: UIRotationGestureRecognizer
     ) {
+        game.shuffle()
 
+        updateCardAreaView()
     }
     
     private func startSiri() {
@@ -190,85 +223,25 @@ class ViewController: UIViewController {
         
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
-//        cleanupBoard()
         updateView()
     }
     
     private func updateView() {
         playerScoreLabel.text = "Player: \(game.playerScore)"
         
-        if game.over || game.full || game.deckEmpty {
-            // TODO: disable deal
-        } else {
-            // TODO: enable deal
+        for case let cardView as CardView in cardAreaView.subviews {
+            if game.selectedCards.contains(cardView.card) {
+                cardView.layer.borderWidth = 4.0
+                cardView.layer.borderColor = #colorLiteral(red: 1, green: 0, blue: 0.4598447084, alpha: 1)
+            } else {
+                cardView.layer.borderWidth = 2
+                cardView.layer.borderColor = #colorLiteral(red: 0.2341006696, green: 0.2327153981, blue: 0.2351695895, alpha: 1)
+            }
         }
-        
-//        for index in cardSlots.indices {
-//            let slot = cardSlots[index]
-//            let button = cardButtons[index]
-//
-//            if slot == nil {
-//                button.layer.borderWidth = 0.0
-//                button.setTitle(nil, for: UIControl.State.normal)
-//                button.setAttributedTitle(nil, for: UIControl.State.normal)
-//                button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-//            } else {
-//                let card = slot!
-//
-//                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//
-//                if game.selectedCards.contains(card) {
-//                    button.layer.borderWidth = 4.0
-//                    button.layer.borderColor = #colorLiteral(red: 0, green: 0.9344006181, blue: 0.8458675742, alpha: 1)
-//                } else {
-//                    button.layer.borderWidth = 0.0
-//                }
-//
-//                var strokeWidth: Double
-//                var cardColor: UIColor
-//                var foregroundColor: UIColor
-//
-//                if card.color == 0 {
-//                    cardColor = #colorLiteral(red: 0.3988213539, green: 0.2490597665, blue: 0.7633544207, alpha: 1)
-//                } else if card.color == 1 {
-//                    cardColor = #colorLiteral(red: 0.7223100066, green: 0.1986979246, blue: 0.4815690517, alpha: 1)
-//                } else {
-//                    cardColor = #colorLiteral(red: 0, green: 0.5941582322, blue: 0.3905805945, alpha: 1)
-//                }
-//
-//                if card.style == 0 {
-//                    strokeWidth = -1
-//                    foregroundColor = cardColor.withAlphaComponent(0.40)
-//                } else if card.style == 1 {
-//                    strokeWidth = -1
-//                    foregroundColor = cardColor.withAlphaComponent(1.00)
-//                } else {
-//                    strokeWidth = 6
-//                    foregroundColor = cardColor.withAlphaComponent(0.00)
-//                }
-//
-//                let attributes: [NSAttributedString.Key : Any] = [
-//                    .strokeColor: cardColor,
-//                    .foregroundColor: foregroundColor,
-//                    .strokeWidth: strokeWidth,
-//                    .font: UIFont.systemFont(ofSize: 26),
-//                ]
-//
-//                var shapeString = ""
-//                for _ in 1...card.number {
-//                    shapeString += shapes[card.shape]
-//                }
-//
-//                button.setAttributedTitle(
-//                    NSAttributedString(
-//                        string: shapeString, attributes: attributes
-//                    ),
-//                    for: UIControl.State.normal
-//                )
-//            }
-//        }
     }
-    
+}
+
+extension CGRect {
     
 }
 

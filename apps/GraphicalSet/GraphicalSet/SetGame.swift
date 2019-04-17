@@ -53,6 +53,10 @@ struct SetGame
         return false
     }
     
+    mutating func shuffle() {
+        cardsInPlay.shuffle()
+    }
+    
     mutating private func resetDeck() {
         selectedCards.removeAll()
         cardsInPlay.removeAll()
@@ -159,7 +163,7 @@ struct SetGame
         }
     }
     
-    mutating func chooseCard(card: Card) {
+    mutating func chooseCard(_ card: Card) {
         if selectedCards.contains(card) {
             selectedCards.remove(at: selectedCards.firstIndex(of: card)!)
         } else {

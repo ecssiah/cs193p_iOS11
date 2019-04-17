@@ -8,12 +8,9 @@
 
 import UIKit
 
-class CardView: UIView {
-
-    var shape = Shape.squiggle
-    var style = Style.unfilled
-    var color = Color.green
-    var number = Number.one
+class CardView: UIView
+{
+    static var inset: CGFloat = 2
     
     enum Shape : CaseIterable {
         case squiggle
@@ -39,9 +36,21 @@ class CardView: UIView {
         case three
     }
     
+    var card = Card(
+        feature1: Card.Variant.v1,
+        feature2: Card.Variant.v1,
+        feature3: Card.Variant.v1,
+        feature4: Card.Variant.v1
+    )
+    
+    var shape = Shape.squiggle
+    var style = Style.unfilled
+    var color = Color.green
+    var number = Number.one
+    
     override func draw(_ rect: CGRect) {
-        
-
 
     }
+    
+    
 }
