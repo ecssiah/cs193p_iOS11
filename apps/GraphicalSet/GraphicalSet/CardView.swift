@@ -99,6 +99,21 @@ class CardView: UIView
         
         path.lineWidth = 3.0
         
+        let numLines = 12
+        let stripes = UIBezierPath()
+        stripes.lineWidth = 2.0
+        
+        for pos in 0..<numLines {
+            let curX = CGFloat(pos) * bounds.size.width / CGFloat(numLines)
+            stripes.move(
+                to: CGPoint(
+                    x: curX,
+                    y: 0
+                )
+            )
+            stripes.addLine(to: CGPoint(x: curX, y: bounds.size.height))
+        }
+        
         switch number {
         case Number.one:
             switch style {
@@ -108,7 +123,9 @@ class CardView: UIView
             case Style.unfilled:
                 path.stroke()
             case Style.striped:
-                break
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
             }
         case Number.two:
             switch style {
@@ -119,14 +136,17 @@ class CardView: UIView
                         y: -0.2 * bounds.size.width
                     )
                 )
+                
                 path.stroke()
                 path.fill()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: 0.4 * bounds.size.width
                     )
                 )
+                
                 path.stroke()
                 path.fill()
             case Style.unfilled:
@@ -138,58 +158,124 @@ class CardView: UIView
                 )
                 
                 path.stroke()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: 0.4 * bounds.size.width
                     )
                 )
+                
                 path.stroke()
             case Style.striped:
-                break
+                let context = UIGraphicsGetCurrentContext()
+                context!.saveGState()
+                
+                path.apply(
+                    CGAffineTransform(
+                        translationX: 0,
+                        y: -0.2 * bounds.size.width
+                    )
+                )
+                
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
+                
+                context!.restoreGState()
+                
+                path.apply(
+                    CGAffineTransform(
+                        translationX: 0,
+                        y: 0.4 * bounds.size.width
+                    )
+                )
+                
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
             }
         case Number.three:
             switch style {
             case Style.solid:
                 path.stroke()
                 path.fill()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: -1.5 * bounds.size.width / 4
                     )
                 )
+                
                 path.stroke()
                 path.fill()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: 1.5 * bounds.size.width / 2
                     )
                 )
+                
                 path.stroke()
                 path.fill()
             case Style.unfilled:
                 path.stroke()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: -1.5 * bounds.size.width / 4
                     )
                 )
+                
                 path.stroke()
+                
                 path.apply(
                     CGAffineTransform(
                         translationX: 0,
                         y: 1.5 * bounds.size.width / 2
                     )
                 )
+                
                 path.stroke()
             case Style.striped:
-                break
+                let context = UIGraphicsGetCurrentContext()
+                context!.saveGState()
+                
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
+                
+                context!.restoreGState()
+                context!.saveGState()
+                
+                path.apply(
+                    CGAffineTransform(
+                        translationX: 0,
+                        y: -1.5 * bounds.size.width / 4
+                    )
+                )
+                
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
+                
+                context!.restoreGState()
+                
+                path.apply(
+                    CGAffineTransform(
+                        translationX: 0,
+                        y: 1.5 * bounds.size.width / 2
+                    )
+                )
+                
+                path.stroke()
+                path.addClip()
+                stripes.stroke()
             }
         }
-        
     }
     
     private func bezierSquiggle(_ rect: CGRect) -> UIBezierPath {

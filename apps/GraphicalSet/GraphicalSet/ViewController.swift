@@ -223,6 +223,7 @@ class ViewController: UIViewController
             startSiri()
         }
         
+        updateCardAreaView()
         updateView()
     }
     
