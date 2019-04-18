@@ -14,7 +14,6 @@ class CardTapGestureRecognizer : UITapGestureRecognizer
     
     init(target: Any?, action: Selector?, card: Card) {
         self.card = card
-
         super.init(target: target, action: action)
     }
 }
@@ -44,7 +43,7 @@ class ViewController: UIViewController
             cardAreaView.addGestureRecognizer(swipe)
             
             let rotate = UIRotationGestureRecognizer(
-                target: self, action: #selector(rotateCards(recognizedBy:))
+                target: self, action: #selector(rotateCards(sender:))
             )
             cardAreaView.addGestureRecognizer(rotate)
         }
@@ -93,11 +92,12 @@ class ViewController: UIViewController
                 let card = game.cardsInPlay[index]
                 
                 let cardView = CardView(
-                    frame: frame.insetBy(dx: CardView.inset, dy: CardView.inset)
+                    frame: frame.insetBy(
+                        dx: CardView.inset, dy: CardView.inset
+                    )
                 )
-                cardView.card = card
-                cardView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
                 
+                cardView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
                 cardView.layer.cornerRadius = 12
                 cardView.layer.masksToBounds = true
                 
@@ -125,10 +125,10 @@ class ViewController: UIViewController
                 case Card.Variant.v3: cardView.number = CardView.Number.three
                 }
                 
-                let tap = CardTapGestureRecognizer(
+                let cardTap = CardTapGestureRecognizer(
                     target: self, action: #selector(touchCard), card: card
                 )
-                cardView.addGestureRecognizer(tap)
+                cardView.addGestureRecognizer(cardTap)
                 
                 cardAreaView.addSubview(cardView)
             }
@@ -144,6 +144,7 @@ class ViewController: UIViewController
         siriAvatarButton.setTitle("😴", for: UIControl.State.normal)
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
+        updateCardAreaView()
         updateView()
     }
     
@@ -171,13 +172,12 @@ class ViewController: UIViewController
     private func touchCard(sender: CardTapGestureRecognizer) {
         game.chooseCard(sender.card)
         
+        updateCardAreaView()
         updateView()
     }
     
     @objc
-    private func rotateCards(
-        recognizedBy recognizer: UIRotationGestureRecognizer
-    ) {
+    private func rotateCards(sender: UIRotationGestureRecognizer) {
         game.shuffle()
 
         updateCardAreaView()
@@ -197,17 +197,19 @@ class ViewController: UIViewController
         siriAvatarButton.setTitle("😏", for: UIControl.State.normal)
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
-        updateView()
-        
         let interval = TimeInterval.init(floatLiteral: 5)
         
         siriTimer = Timer.scheduledTimer(
             withTimeInterval: interval, repeats: false, block: siriChoice
         )
+        
+        updateView()
     }
     
     private func siriChoice(timer: Timer) {
         game.siriMove()
+        
+        siriScoreLabel.text = "Siri: \(game.siriScore)"
         
         if (game.over) {
             if game.siriScore > game.playerScore {
@@ -221,17 +223,18 @@ class ViewController: UIViewController
             startSiri()
         }
         
-        siriScoreLabel.text = "Siri: \(game.siriScore)"
-        
         updateView()
     }
     
     private func updateView() {
         playerScoreLabel.text = "Player: \(game.playerScore)"
         
-        for case let cardView as CardView in cardAreaView.subviews {
-            if game.selectedCards.contains(cardView.card) {
-                cardView.layer.borderWidth = 4.0
+        for index in game.cardsInPlay.indices {
+            let card = game.cardsInPlay[index]
+            let cardView = cardAreaView.subviews[index]
+            
+            if game.selectedCards.contains(card) {
+                cardView.layer.borderWidth = 4
                 cardView.layer.borderColor = #colorLiteral(red: 1, green: 0, blue: 0.4598447084, alpha: 1)
             } else {
                 cardView.layer.borderWidth = 2
@@ -240,8 +243,3 @@ class ViewController: UIViewController
         }
     }
 }
-
-extension CGRect {
-    
-}
-

@@ -15,8 +15,6 @@ struct SetGame
         case siri
     }
     
-    private let numCards = 24
-
     private(set) var playerScore = 0
     private(set) var siriScore = 0
     
@@ -32,22 +30,13 @@ struct SetGame
         return cardsInDeck.count == 0
     }
     
-    var full: Bool {
-        return cardsInPlay.count == numCards
-    }
-    
     var over: Bool {
         if cardsInDeck.count == 0 && cardsInPlay.count == 0 {
             return true
         }
         
-        if findSet() == nil {
-            let boardFull = cardsInPlay.count == numCards
-            let noCardsLeft = cardsInDeck.count == 0
-            
-            if boardFull || noCardsLeft {
-                return true
-            }
+        if findSet() == nil && cardsInDeck.count == 0 {
+            return true
         }
         
         return false
@@ -123,7 +112,7 @@ struct SetGame
         
         resetDeck()
         
-        deal(thisMany: 18)
+        deal(thisMany: 12)
         
         lastPlayerMoveTime = DispatchTime.now()
     }
@@ -197,16 +186,6 @@ struct SetGame
         }
         
         selectedCards.removeAll()
-    }
-    
-    mutating func deal() -> Card {
-        let card = cardsInDeck.remove(
-            at: Int(arc4random_uniform(UInt32(cardsInDeck.count)))
-        )
-        
-        cardsInPlay.append(card)
-        
-        return card
     }
     
     mutating func deal(thisMany numCards: Int) {
