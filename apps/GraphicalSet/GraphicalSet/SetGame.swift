@@ -233,8 +233,10 @@ struct SetGame
         return Set([first, second, third]).count != 2
     }
     
-    mutating func siriMove() {
+    mutating func siriMove() -> Bool {
         lastSiriMoveTime = DispatchTime.now()
+        
+        selectedCards.removeAll()
         
         if let foundSet = findSet() {
             siriScore += 3 + getCardBonus() + getSpeedBonus(for: User.siri)
@@ -246,9 +248,11 @@ struct SetGame
                 
                 return matchFirst && matchSecond && matchThird
             })
+
+            return true
+        } else {
+            return false
         }
-        
-        selectedCards.removeAll()
     }
     
     init() {

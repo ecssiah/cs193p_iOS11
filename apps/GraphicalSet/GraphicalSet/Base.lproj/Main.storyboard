@@ -87,10 +87,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uul-VD-Hp2">
-                                <rect key="frame" x="20" y="828" width="374" height="34"/>
+                                <rect key="frame" x="20" y="824" width="374" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQP-wo-uzP">
-                                        <rect key="frame" x="122" y="1" width="130" height="34"/>
+                                        <rect key="frame" x="122" y="1" width="130" height="32"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="hyN-DY-N08"/>
@@ -107,14 +107,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="8Do-vm-pch"/>
+                                    <constraint firstAttribute="height" constant="38" id="8Do-vm-pch"/>
                                     <constraint firstItem="rQP-wo-uzP" firstAttribute="centerX" secondItem="uul-VD-Hp2" secondAttribute="centerX" id="Kzi-b5-uAI"/>
                                     <constraint firstItem="rQP-wo-uzP" firstAttribute="top" secondItem="uul-VD-Hp2" secondAttribute="top" constant="1" id="Yho-RH-3eA"/>
-                                    <constraint firstItem="rQP-wo-uzP" firstAttribute="height" secondItem="uul-VD-Hp2" secondAttribute="height" id="hDo-Kh-trA"/>
+                                    <constraint firstItem="rQP-wo-uzP" firstAttribute="height" secondItem="uul-VD-Hp2" secondAttribute="height" multiplier="0.84" id="hDo-Kh-trA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxc-zL-0eX">
-                                <rect key="frame" x="20" y="106" width="374" height="714"/>
+                                <rect key="frame" x="20" y="106" width="374" height="717"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -124,7 +124,7 @@
                             <constraint firstItem="pxc-zL-0eX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6l6-xd-tAO"/>
                             <constraint firstItem="Y0j-BD-agM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="6tW-6U-CAt"/>
                             <constraint firstItem="pxc-zL-0eX" firstAttribute="top" secondItem="Y0j-BD-agM" secondAttribute="bottom" constant="8" symbolic="YES" id="9a1-Vb-q92"/>
-                            <constraint firstItem="uul-VD-Hp2" firstAttribute="top" secondItem="pxc-zL-0eX" secondAttribute="bottom" constant="8" symbolic="YES" id="BJ8-ep-Mak"/>
+                            <constraint firstItem="uul-VD-Hp2" firstAttribute="top" secondItem="pxc-zL-0eX" secondAttribute="bottom" constant="1" id="BJ8-ep-Mak"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uul-VD-Hp2" secondAttribute="trailing" constant="20" id="G7F-cE-uhM"/>
                             <constraint firstItem="uul-VD-Hp2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Jw9-hw-Qgz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uul-VD-Hp2" secondAttribute="bottom" id="fIz-M5-9GG"/>

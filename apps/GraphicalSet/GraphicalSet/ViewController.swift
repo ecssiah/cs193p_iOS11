@@ -207,7 +207,9 @@ class ViewController: UIViewController
     }
     
     private func siriChoice(timer: Timer) {
-        game.siriMove()
+        if !game.siriMove() {
+            deal()
+        }
         
         siriScoreLabel.text = "Siri: \(game.siriScore)"
         
