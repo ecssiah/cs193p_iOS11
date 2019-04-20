@@ -19,22 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sWj-Bb-7n6" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="58" y="97" width="78" height="112"/>
+                                <rect key="frame" x="20" y="44" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rank">
-                                        <integer key="value" value="3"/>
+                                        <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="suit" value="♥️"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-9A-hZK" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="177" y="123" width="78" height="112"/>
+                                <rect key="frame" x="168" y="44" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oTy-x4-RqW" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="282" y="174" width="78" height="112"/>
+                                <rect key="frame" x="316" y="44" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -44,12 +45,12 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ynF-Ir-pOl" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="58" y="265" width="78" height="112"/>
+                                <rect key="frame" x="20" y="210" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQv-Pf-7Di" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="177" y="304" width="78" height="112"/>
+                                <rect key="frame" x="168" y="210" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -59,7 +60,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rah-xC-lb1" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="282" y="349" width="78" height="112"/>
+                                <rect key="frame" x="316" y="210" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -69,7 +70,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NoU-rD-2BB" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="58" y="456" width="78" height="112"/>
+                                <rect key="frame" x="20" y="392" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -79,22 +80,22 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SVs-wu-yST" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="177" y="490" width="78" height="112"/>
+                                <rect key="frame" x="168" y="392" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ApL-59-1Z4" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="282" y="530" width="78" height="112"/>
+                                <rect key="frame" x="316" y="392" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="foG-tN-QsZ" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="58" y="623" width="78" height="112"/>
+                                <rect key="frame" x="20" y="583" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKC-Iq-WmX" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="177" y="663" width="78" height="112"/>
+                                <rect key="frame" x="168" y="583" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -104,7 +105,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nAQ-V1-0R1" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
-                                <rect key="frame" x="282" y="693" width="78" height="112"/>
+                                <rect key="frame" x="316" y="583" width="78" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
