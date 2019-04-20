@@ -12,12 +12,20 @@ import UIKit
 class PlayingCardView: UIView
 {
   @IBInspectable
-  var rank: Int = 12 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+  var rank: Int = 12 {
+    didSet { setNeedsDisplay(); setNeedsLayout() }
+  }
   @IBInspectable
-  var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+  var suit: String = "♥️" {
+    didSet { setNeedsDisplay(); setNeedsLayout() }
+  }
   @IBInspectable
-  var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
-  var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay(); setNeedsLayout() } }
+  var isFaceUp: Bool = true {
+    didSet { setNeedsDisplay(); setNeedsLayout() }
+  }
+  var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize {
+    didSet { setNeedsDisplay(); setNeedsLayout() }
+  }
   
   @objc
   func adjustFaceCardScale(recognizedBy recognizer: UIPinchGestureRecognizer) {
@@ -29,7 +37,9 @@ class PlayingCardView: UIView
     }
   }
   
-  private func centeredAttributedString(_ string: String, fontSize: CGFloat) -> NSAttributedString {
+  private func centeredAttributedString(_ string: String, fontSize: CGFloat)
+    -> NSAttributedString
+  {
     var font = UIFont.preferredFont(forTextStyle: .body).withSize(fontSize)
     font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
     
@@ -43,7 +53,9 @@ class PlayingCardView: UIView
   }
   
   private var cornerString: NSAttributedString {
-    return centeredAttributedString(rankString + "\n" + suit, fontSize: cornerFontSize)
+    return centeredAttributedString(
+      rankString + "\n" + suit, fontSize: cornerFontSize
+    )
   }
   
   private lazy var upperLeftCornerLabel = createCornerLabel()
@@ -65,7 +77,9 @@ class PlayingCardView: UIView
     label.isHidden = !isFaceUp
   }
   
-  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+  override func traitCollectionDidChange(
+    _ previousTraitCollection: UITraitCollection?
+  ) {
     setNeedsDisplay()
     setNeedsLayout()
   }
@@ -86,26 +100,22 @@ class PlayingCardView: UIView
       .translatedBy(
         x: lowerRightCornerLabel.frame.size.width,
         y: lowerRightCornerLabel.frame.size.height
-    )
-    
-    lowerRightCornerLabel.frame.origin = CGPoint(
-      x: bounds.maxX, y: bounds.maxY
       )
+    
+    lowerRightCornerLabel.frame.origin = CGPoint(x: bounds.maxX, y: bounds.maxY)
       .offsetBy(dx: -cornerOffset, dy: -cornerOffset)
       .offsetBy(
         dx: -lowerRightCornerLabel.frame.size.width,
         dy: -lowerRightCornerLabel.frame.size.height
-    )
-    
-    
+      )
   }
   
   override func draw(_ rect: CGRect) {
-    let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+    let roundedRect = UIBezierPath(
+      roundedRect: bounds, cornerRadius: cornerRadius
+    )
     roundedRect.addClip()
-    
     UIColor.white.setFill()
-    
     roundedRect.fill()
     
     if isFaceUp {
@@ -113,7 +123,7 @@ class PlayingCardView: UIView
         named: rankString + suit,
         in: Bundle(for: self.classForCoder),
         compatibleWith: traitCollection
-        ) {
+      ) {
         faceCardImage.draw(in: bounds.zoom(by: faceCardScale))
       } else {
         drawPips()
@@ -123,7 +133,7 @@ class PlayingCardView: UIView
         named: "cardback",
         in: Bundle(for: self.classForCoder),
         compatibleWith: traitCollection
-        ) {
+      ) {
         cardBackImage.draw(in: bounds)
       }
     }
@@ -134,20 +144,38 @@ class PlayingCardView: UIView
   {
     let pipsPerRowForRank = [
       [0], [1],
-      [1,1], [1,1,1], [2,2], [2,1,2], [2,2,2], [2,1,2,2], [2,2,2,2],
+      [1,1], [2,2],
+      [1,1,1], [2,1,2], [2,2,2],
+      [2,1,2,2], [2,2,2,2],
       [2,2,1,2,2], [2,2,2,2,2]
     ]
     
     func createPipString(thatFits pipRect: CGRect) -> NSAttributedString {
-      let maxVerticalPipCount = CGFloat(pipsPerRowForRank.reduce(0) { max($1.count, $0)})
-      let maxHorizontalPipCount = CGFloat(pipsPerRowForRank.reduce(0) { max($1.max() ?? 0, $0)})
+      let maxVerticalPipCount = CGFloat(
+        pipsPerRowForRank.reduce(0) { max($1.count, $0) }
+      )
+      let maxHorizontalPipCount = CGFloat(
+        pipsPerRowForRank.reduce(0) { max($1.max() ?? 0, $0) }
+      )
       let verticalPipRowSpacing = pipRect.size.height / maxVerticalPipCount
-      let attemptedPipString = centeredAttributedString(suit, fontSize: verticalPipRowSpacing)
-      let probablyOkayPipStringFontSize = verticalPipRowSpacing / (attemptedPipString.size().height / verticalPipRowSpacing)
-      let probablyOkayPipString = centeredAttributedString(suit, fontSize: probablyOkayPipStringFontSize)
-      if probablyOkayPipString.size().width > pipRect.size.width / maxHorizontalPipCount {
-        return centeredAttributedString(suit, fontSize: probablyOkayPipStringFontSize /
-          (probablyOkayPipString.size().width / (pipRect.size.width / maxHorizontalPipCount)))
+      let attemptedPipString = centeredAttributedString(
+        suit, fontSize: verticalPipRowSpacing
+      )
+      let probablyOkayPipStringFontSize = verticalPipRowSpacing /
+        (attemptedPipString.size().height / verticalPipRowSpacing)
+      let probablyOkayPipString = centeredAttributedString(
+        suit, fontSize: probablyOkayPipStringFontSize
+      )
+      
+      if probablyOkayPipString.size().width > pipRect.size.width /
+        maxHorizontalPipCount
+      {
+        return centeredAttributedString(
+          suit,
+          fontSize: probablyOkayPipStringFontSize /
+            (probablyOkayPipString.size().width /
+              (pipRect.size.width / maxHorizontalPipCount))
+        )
       } else {
         return probablyOkayPipString
       }
@@ -157,7 +185,10 @@ class PlayingCardView: UIView
       let pipsPerRow = pipsPerRowForRank[rank]
       var pipRect = bounds
         .insetBy(dx: cornerOffset, dy: cornerOffset)
-        .insetBy(dx: cornerString.size().width, dy: cornerString.size().height / 2)
+        .insetBy(
+          dx: cornerString.size().width,
+          dy: cornerString.size().height / 2
+        )
       let pipString = createPipString(thatFits: pipRect)
       let pipRowSpacing = pipRect.size.height / CGFloat(pipsPerRow.count)
       pipRect.size.height = pipString.size().height
@@ -177,7 +208,6 @@ class PlayingCardView: UIView
       }
     }
   }
-  
 }
 
 extension PlayingCardView {
@@ -201,7 +231,7 @@ extension PlayingCardView {
   }
   
   private var rankString: String {
-    switch rank{
+    switch rank {
     case 1: return "A"
     case 2...10: return String(rank)
     case 11: return "J"
