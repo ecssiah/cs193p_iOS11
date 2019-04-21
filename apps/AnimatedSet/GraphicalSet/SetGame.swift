@@ -10,11 +10,6 @@ import Foundation
 
 struct SetGame
 {
-    enum User {
-        case human
-        case siri
-    }
-    
     private(set) var cardsInDeck = [Card]()
     private(set) var cardsInPlay = [Card]()
     
@@ -173,7 +168,24 @@ struct SetGame
         return Set([first, second, third]).count != 2
     }
     
-  
+    mutating func siriMove() -> Bool {
+        selectedCards.removeAll()
+        
+        if let foundSet = findSet() {
+            cardsInPlay = cardsInPlay.filter({(card: Card) in
+                let matchFirst = card != foundSet.0
+                let matchSecond = card != foundSet.1
+                let matchThird = card != foundSet.2
+                
+                return matchFirst && matchSecond && matchThird
+            })
+
+            return true
+        } else {
+            return false
+        }
+    }
+    
     init() {
         createDeck()
         newGame()
