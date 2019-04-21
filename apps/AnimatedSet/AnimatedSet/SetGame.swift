@@ -10,45 +10,27 @@ import Foundation
 
 struct SetGame
 {
-    private(set) var cardsInDeck = [Card]()
-    private(set) var cardsInPlay = [Card]()
+    private(set) var deck = [Card]()
     
+    private(set) var playedCards = [Card]()
     private(set) var selectedCards = [Card]()
     
-    var deckEmpty: Bool {
-        return cardsInDeck.count == 0
-    }
-    
-    var over: Bool {
-        if cardsInDeck.count == 0 && cardsInPlay.count == 0 {
-            return true
-        }
-        
-        if findSet() == nil && cardsInDeck.count == 0 {
-            return true
-        }
-        
-        return false
-    }
-    
     mutating func shuffle() {
-        cardsInPlay.shuffle()
+
     }
     
     mutating private func resetDeck() {
         selectedCards.removeAll()
-        cardsInPlay.removeAll()
-        
-        createDeck()
+        playedCards.removeAll()
     }
     
     private func findSet() -> (Card, Card, Card)? {
-        for idx1 in cardsInPlay.indices {
-            for idx2 in (idx1 + 1)..<cardsInPlay.count {
-                for idx3 in (idx2 + 1)..<cardsInPlay.count {
-                    let card1 = cardsInPlay[idx1]
-                    let card2 = cardsInPlay[idx2]
-                    let card3 = cardsInPlay[idx3]
+        for idx1 in playedCards.indices {
+            for idx2 in (idx1 + 1)..<playedCards.count {
+                for idx3 in (idx2 + 1)..<playedCards.count {
+                    let card1 = playedCards[idx1]
+                    let card2 = playedCards[idx2]
+                    let card3 = playedCards[idx3]
                     
                     let setFound = makesSet(
                         first: card1, second: card2, third: card3
@@ -65,8 +47,6 @@ struct SetGame
     }
     
     mutating private func createDeck() {
-        cardsInDeck.removeAll()
-        
         for feature1 in Card.Variant.allCases {
             for feature2 in Card.Variant.allCases {
                 for feature3 in Card.Variant.allCases {
@@ -78,7 +58,7 @@ struct SetGame
                             feature4: feature4
                         )
                         
-                        cardsInDeck += [card]
+                        deck += [card]
                     }
                 }
             }
@@ -111,7 +91,7 @@ struct SetGame
         )
         
         if completeSet {
-            cardsInPlay = cardsInPlay.filter({(card: Card) in
+            playedCards = playedCards.filter({(card: Card) in
                 let matchFirst = card != selectedCards[0]
                 let matchSecond = card != selectedCards[1]
                 let matchThird = card != selectedCards[2]
@@ -125,15 +105,15 @@ struct SetGame
     
     mutating func deal(thisMany numCards: Int) {
         for _ in 1...numCards {
-            if cardsInDeck.count == 0 {
+            if playedCards.count == deck.count {
                 break
             }
             
-            let card = cardsInDeck.remove(
-                at: Int(arc4random_uniform(UInt32(cardsInDeck.count)))
-            )
+            let cardsInDeck = deck.filter { !playedCards.contains($0) }
             
-            cardsInPlay.append(card)
+            let card = cardsInDeck[Int(arc4random_uniform(UInt32(cardsInDeck.count)))]
+            
+            playedCards.append(card)
         }
     }
     
@@ -162,10 +142,12 @@ struct SetGame
         return feature1Set && feature2Set && feature3Set && feature4Set
     }
     
-    func traitCheck(first: Card.Variant, second: Card.Variant, third: Card.Variant) -> Bool {
+    func traitCheck(
+        first: Card.Variant, second: Card.Variant, third: Card.Variant
+    ) -> Bool {
         return Set([first, second, third]).count != 2
     }
-  
+    
     init() {
         createDeck()
         newGame()

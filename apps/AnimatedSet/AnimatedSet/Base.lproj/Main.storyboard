@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimatedSet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxc-zL-0eX">
+                                <rect key="frame" x="20" y="44" width="374" height="652"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZw-sM-l4b">
+                                <rect key="frame" x="20" y="704" width="374" height="158"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISl-Kk-IXa">
+                                        <rect key="frame" x="8" y="0.0" width="112.5" height="150"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ISl-Kk-IXa" secondAttribute="height" multiplier="3:4" id="i6w-6O-qpK"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76d-Lu-TDQ">
+                                        <rect key="frame" x="253.5" y="0.0" width="112.5" height="150"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ISl-Kk-IXa" firstAttribute="top" secondItem="kZw-sM-l4b" secondAttribute="top" id="CXA-b7-HBg"/>
+                                    <constraint firstAttribute="bottom" secondItem="ISl-Kk-IXa" secondAttribute="bottom" constant="8" id="Ebf-1n-seZ"/>
+                                    <constraint firstItem="76d-Lu-TDQ" firstAttribute="width" secondItem="76d-Lu-TDQ" secondAttribute="height" multiplier="3:4" id="Knt-eg-nAk"/>
+                                    <constraint firstAttribute="trailing" secondItem="76d-Lu-TDQ" secondAttribute="trailing" constant="8" id="L3F-3e-pZW"/>
+                                    <constraint firstItem="ISl-Kk-IXa" firstAttribute="leading" secondItem="kZw-sM-l4b" secondAttribute="leading" constant="8" id="QVw-MN-rx9"/>
+                                    <constraint firstAttribute="height" constant="158" id="it1-OC-HiE"/>
+                                    <constraint firstAttribute="bottom" secondItem="76d-Lu-TDQ" secondAttribute="bottom" constant="8" id="lmg-5T-K4S"/>
+                                    <constraint firstItem="76d-Lu-TDQ" firstAttribute="top" secondItem="kZw-sM-l4b" secondAttribute="top" id="yfq-5W-vX3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.3572345890410959" green="0.20084659830721885" blue="0.23382299525270467" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="pxc-zL-0eX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3XZ-kP-n6q"/>
+                            <constraint firstItem="pxc-zL-0eX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6l6-xd-tAO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kZw-sM-l4b" secondAttribute="trailing" constant="20" id="Cf8-s0-SLn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kZw-sM-l4b" secondAttribute="bottom" id="ZPu-mH-VmU"/>
+                            <constraint firstItem="kZw-sM-l4b" firstAttribute="top" secondItem="pxc-zL-0eX" secondAttribute="bottom" constant="8" id="lOf-X0-SBC"/>
+                            <constraint firstItem="kZw-sM-l4b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="m31-mH-iUE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pxc-zL-0eX" secondAttribute="trailing" constant="20" id="ubh-IU-yFg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardAreaView" destination="pxc-zL-0eX" id="r9W-at-X4g"/>
+                        <outlet property="deckArea" destination="kZw-sM-l4b" id="ma8-ld-TPB"/>
+                        <outlet property="deckView" destination="ISl-Kk-IXa" id="Ib5-rb-9XN"/>
+                        <outlet property="discardView" destination="76d-Lu-TDQ" id="1qy-tU-MzW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-59.420289855072468" y="108.48214285714285"/>
+        </scene>
+    </scenes>
+</document>
