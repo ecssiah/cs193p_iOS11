@@ -16,8 +16,14 @@ struct SetGame
     private(set) var discardedCards = [Card]()
     private(set) var selectedCards = [Card]()
     
+    var cardsInDeck: [Card] {
+        return deck.filter {
+            !playedCards.contains($0) && !discardedCards.contains($0)
+        }
+    }
+    
     mutating func shuffle() {
-
+        playedCards.shuffle()
     }
     
     mutating private func resetDeck() {
@@ -105,6 +111,8 @@ struct SetGame
                 contentsOf: [selectedCards[0], selectedCards[1], selectedCards[2]],
                 at: 0
             )
+            
+            deal(thisMany: 3)
         }
         
         selectedCards.removeAll()
@@ -115,8 +123,6 @@ struct SetGame
             if playedCards.count == deck.count {
                 break
             }
-            
-            let cardsInDeck = deck.filter { !playedCards.contains($0) }
             
             let card = cardsInDeck[Int(arc4random_uniform(UInt32(cardsInDeck.count)))]
             
@@ -155,6 +161,5 @@ struct SetGame
     
     init() {
         createDeck()
-        newGame()
     }
 }

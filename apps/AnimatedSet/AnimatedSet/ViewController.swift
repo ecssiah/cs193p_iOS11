@@ -50,17 +50,44 @@ class ViewController: UIViewController
         
         setupCardViews()
         
+        Timer.scheduledTimer(
+            withTimeInterval: 1.0,
+            repeats: false,
+            block: startGame(timer:)
+        )
+    }
+    
+    private func startGame(timer: Timer) {
+        game.newGame()
         updateView()
     }
-
+    
     override func viewDidLayoutSubviews() {
-        let cardsInDeck = game.deck.filter {
-            !game.playedCards.contains($0) || !game.discardedCards.contains($0)
+        updateLayout()
+    }
+    
+    private func setupCardViews() {
+        let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
+        
+        for card in game.deck {
+            let cardView = CardView(frame: initialFrame)
+            cardView.card = card
+            cardView.backgroundColor = UIColor.clear
+            
+            cardAreaView.addSubview(cardView)
+            
+            let cardTap = CardTapGestureRecognizer(target: self, action: #selector(touchCard), card: card)
+            cardView.addGestureRecognizer(cardTap)
         }
+    }
+    
+    private func updateLayout() {
+        deckArea.setNeedsLayout()
+        deckArea.layoutIfNeeded()
         
         let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
         
-        for card in cardsInDeck {
+        for card in game.cardsInDeck {
             let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
             
             if let cardView = cardViews.first(where: { $0.card == card }) {
@@ -69,8 +96,6 @@ class ViewController: UIViewController
         }
         
         let discardFrame = cardAreaView.convert(discardView.frame, from: deckArea)
-        
-        print(discardFrame)
         
         for card in game.discardedCards {
             let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
@@ -88,9 +113,111 @@ class ViewController: UIViewController
             let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
             
             if let cardView = cardViews.first(where: { $0.card == card }) {
-                cardView.frame = grid[index]!.insetBy(
-                    dx: CardView.inset, dy: CardView.inset
-                )
+                if let frame = grid[index] {
+                    cardView.frame = frame.insetBy(dx: CardView.inset, dy: CardView.inset)
+                }
+            }
+        }
+    }
+
+    
+    private func updateView() {
+        grid.frame = cardAreaView.bounds
+        grid.cellCount = game.playedCards.count
+        
+        var newCardIndex = -1
+        
+        for index in game.playedCards.indices {
+            let card = game.playedCards[index]
+            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
+
+            if let cardView = cardViews.first(where: { $0.card == card }) {
+                if game.selectedCards.contains(card) {
+                    cardView.selected = true
+                } else {
+                    cardView.selected = false
+                }
+                
+                cardAreaView.bringSubviewToFront(cardView)
+                
+                let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
+                
+                if cardView.frame == initialFrame {
+                    newCardIndex += 1
+
+                    Timer.scheduledTimer(
+                        withTimeInterval: 0.4 * Double(newCardIndex),
+                        repeats: false,
+                        block: { timer in
+                            UIView.transition(
+                                with: cardView,
+                                duration: 1.5,
+                                options: [.transitionFlipFromTop],
+                                animations: {
+                                    cardView.faceUp = true
+                                }
+                            )
+                        }
+                    )
+                    
+                    if let frame = grid[index] {
+                        UIViewPropertyAnimator.runningPropertyAnimator(
+                            withDuration: 1.5,
+                            delay: 0.4 * Double(newCardIndex),
+                            options: [],
+                            animations: {
+                                cardView.frame = frame.insetBy(dx: CardView.inset, dy: CardView.inset)
+                            }
+                        )
+                    }
+                } else {
+                    if let frame = grid[index] {
+                        UIViewPropertyAnimator.runningPropertyAnimator(
+                            withDuration: 1.0,
+                            delay: 0.0,
+                            options: [],
+                            animations: {
+                                cardView.frame = frame.insetBy(dx: CardView.inset, dy: CardView.inset)
+                            }
+                        )
+                    }
+                }
+            }
+        }
+        
+        for card in game.discardedCards {
+            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
+            
+            if let cardView = cardViews.first(where: { $0.card == card }) {
+                let discardFrame = cardAreaView.convert(discardView.frame, from: deckArea)
+                
+                if cardView.frame != discardFrame {
+                    cardAreaView.bringSubviewToFront(cardView)
+                    
+                    Timer.scheduledTimer(
+                        withTimeInterval: 0.5,
+                        repeats: false,
+                        block: { timer in
+                            UIView.transition(
+                                with: cardView,
+                                duration: 1.0,
+                                options: [.transitionFlipFromTop],
+                                animations: {
+                                    cardView.faceUp = false
+                                }
+                            )
+                        }
+                    )
+                    
+                    UIViewPropertyAnimator.runningPropertyAnimator(
+                        withDuration: 1.5,
+                        delay: 0.0,
+                        options: [],
+                        animations: {
+                            cardView.frame = discardFrame
+                        }
+                    )
+                }
             }
         }
     }
@@ -113,125 +240,7 @@ class ViewController: UIViewController
     private func rotateCards(recognizer: UIRotationGestureRecognizer) {
         if recognizer.state == .ended {
             game.shuffle()
-        }
-    }
-    
-    private func updateView() {
-        grid.frame = cardAreaView.bounds
-        grid.cellCount = game.playedCards.count
-        
-        var newCardCount = 0
-        
-        for index in game.playedCards.indices {
-            let card = game.playedCards[index]
-            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
-
-            if let cardView = cardViews.first(where: { $0.card == card }) {
-                if game.selectedCards.contains(card) {
-                    cardView.selected = true
-                } else {
-                    cardView.selected = false
-                }
-                
-                let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
-                
-                cardAreaView.bringSubviewToFront(cardView)
-                
-                if cardView.frame == initialFrame {
-                    Timer.scheduledTimer(
-                        withTimeInterval: 0.4 * Double(newCardCount),
-                        repeats: false,
-                        block: { timer in
-                            UIView.transition(
-                                with: cardView,
-                                duration: 1.5,
-                                options: [.transitionFlipFromTop],
-                                animations: {
-                                    cardView.faceUp = true
-                                }
-                            )
-                        }
-                    )
-                    
-                    if let frame = grid[index]?.insetBy(dx: CardView.inset, dy: CardView.inset) {
-                        UIViewPropertyAnimator.runningPropertyAnimator(
-                            withDuration: 1.5,
-                            delay: 0.4 * Double(newCardCount),
-                            options: [],
-                            animations: {
-                                cardView.frame = frame
-                            }
-                        )
-                    }
-                    
-                    newCardCount += 1
-                } else {
-                    if let frame = grid[index]?.insetBy(dx: CardView.inset, dy: CardView.inset) {
-                        UIViewPropertyAnimator.runningPropertyAnimator(
-                            withDuration: 1.5,
-                            delay: 0.4,
-                            options: [],
-                            animations: {
-                                cardView.frame = frame
-                            }
-                        )
-                    }
-                }
-            }
-        }
-        
-        for card in game.discardedCards {
-            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
-            
-            let discardFrame = cardAreaView.convert(discardView.frame, from: deckArea)
-            
-            if let cardView = cardViews.first(where: { $0.card == card }) {
-                if cardView.frame != discardFrame {
-                    cardAreaView.bringSubviewToFront(cardView)
-                    
-                    Timer.scheduledTimer(
-                        withTimeInterval: 0.4,
-                        repeats: false,
-                        block: { timer in
-                            UIView.transition(
-                                with: cardView,
-                                duration: 2.0,
-                                options: [.transitionFlipFromTop],
-                                animations: {
-                                    cardView.faceUp = false
-                                }
-                            )
-                        }
-                    )
-                    
-                    UIViewPropertyAnimator.runningPropertyAnimator(
-                        withDuration: 3.0,
-                        delay: 0.0,
-                        options: [],
-                        animations: {
-                            cardView.frame = discardFrame
-                        },
-                        completion: { position in
-                            
-                        }
-                    )
-                }
-            }
-        }
-    }
-    
-    func setupCardViews() {
-        let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
-        
-        for card in game.deck {
-            let cardView = CardView(frame: initialFrame)
-            cardView.card = card
-            cardView.backgroundColor = UIColor.clear
-            
-            cardAreaView.addSubview(cardView)
-            
-            let cardTap = CardTapGestureRecognizer(target: self, action: #selector(touchCard), card: card)
-            cardView.addGestureRecognizer(cardTap)
+            updateView()
         }
     }
 }
