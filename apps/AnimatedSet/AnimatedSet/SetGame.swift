@@ -13,6 +13,7 @@ struct SetGame
     private(set) var deck = [Card]()
     
     private(set) var playedCards = [Card]()
+    private(set) var discardedCards = [Card]()
     private(set) var selectedCards = [Card]()
     
     mutating func shuffle() {
@@ -22,6 +23,7 @@ struct SetGame
     mutating private func resetDeck() {
         selectedCards.removeAll()
         playedCards.removeAll()
+        discardedCards.removeAll()
     }
     
     private func findSet() -> (Card, Card, Card)? {
@@ -90,14 +92,19 @@ struct SetGame
             third: selectedCards[2]
         )
         
-        if completeSet {
-            playedCards = playedCards.filter({(card: Card) in
+        if true || completeSet {
+            playedCards = playedCards.filter { card in
                 let matchFirst = card != selectedCards[0]
                 let matchSecond = card != selectedCards[1]
                 let matchThird = card != selectedCards[2]
                 
                 return matchFirst && matchSecond && matchThird
-            })
+            }
+            
+            discardedCards.insert(
+                contentsOf: [selectedCards[0], selectedCards[1], selectedCards[2]],
+                at: 0
+            )
         }
         
         selectedCards.removeAll()
@@ -142,9 +149,7 @@ struct SetGame
         return feature1Set && feature2Set && feature3Set && feature4Set
     }
     
-    func traitCheck(
-        first: Card.Variant, second: Card.Variant, third: Card.Variant
-    ) -> Bool {
+    func traitCheck(first: Card.Variant, second: Card.Variant, third: Card.Variant) -> Bool {
         return Set([first, second, third]).count != 2
     }
     

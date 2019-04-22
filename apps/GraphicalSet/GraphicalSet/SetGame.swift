@@ -10,6 +10,17 @@ import Foundation
 
 struct SetGame
 {
+    enum User {
+        case human
+        case siri
+    }
+    
+    private(set) var playerScore = 0
+    private(set) var siriScore = 0
+    
+    private(set) var lastPlayerMoveTime: DispatchTime
+    private(set) var lastSiriMoveTime: DispatchTime
+    
     private(set) var cardsInDeck = [Card]()
     private(set) var cardsInPlay = [Card]()
     
@@ -40,6 +51,16 @@ struct SetGame
         cardsInPlay.removeAll()
         
         createDeck()
+    }
+    
+    mutating func resetSiri() {
+        siriScore = 0
+    }
+    
+    mutating func calculateDealingPenalty() {
+        if findSet() != nil {
+            playerScore -= 2
+        }
     }
     
     private func findSet() -> (Card, Card, Card)? {
@@ -86,9 +107,49 @@ struct SetGame
     }
     
     mutating func newGame() {
+        playerScore = 0
+        siriScore = 0
+        
         resetDeck()
         
         deal(thisMany: 12)
+        
+        lastPlayerMoveTime = DispatchTime.now()
+    }
+    
+    mutating func getSpeedBonus(for user: User) -> Int {
+        var elapsed: Double
+        let now = DispatchTime.now()
+        
+        if user == User.human {
+            elapsed = Double(now.rawValue - lastPlayerMoveTime.rawValue) / 1e+9
+            lastPlayerMoveTime = now
+        } else {
+            elapsed = Double(now.rawValue - lastSiriMoveTime.rawValue) / 1e+9
+            lastSiriMoveTime = now
+        }
+        
+        if elapsed < 10 {
+            return 2
+        } else if elapsed < 20 {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
+    func getCardBonus() -> Int {
+        if cardsInPlay.count <= 9 {
+            return 5
+        } else if cardsInPlay.count <= 12 {
+            return 3
+        } else if cardsInPlay.count <= 15 {
+            return 2
+        } else if cardsInPlay.count <= 18 {
+            return 1
+        } else {
+            return 0
+        }
     }
     
     mutating func chooseCard(_ card: Card) {
@@ -111,6 +172,8 @@ struct SetGame
         )
         
         if completeSet {
+            playerScore += 3 + getSpeedBonus(for: User.human) + getCardBonus()
+            
             cardsInPlay = cardsInPlay.filter({(card: Card) in
                 let matchFirst = card != selectedCards[0]
                 let matchSecond = card != selectedCards[1]
@@ -118,6 +181,8 @@ struct SetGame
                 
                 return matchFirst && matchSecond && matchThird
             })
+        } else {
+            playerScore -= 5
         }
         
         selectedCards.removeAll()
@@ -162,11 +227,38 @@ struct SetGame
         return feature1Set && feature2Set && feature3Set && feature4Set
     }
     
-    func traitCheck(first: Card.Variant, second: Card.Variant, third: Card.Variant) -> Bool {
+    func traitCheck(
+        first: Card.Variant, second: Card.Variant, third: Card.Variant
+    ) -> Bool {
         return Set([first, second, third]).count != 2
     }
-  
+    
+    mutating func siriMove() -> Bool {
+        lastSiriMoveTime = DispatchTime.now()
+        
+        selectedCards.removeAll()
+        
+        if let foundSet = findSet() {
+            siriScore += 3 + getCardBonus() + getSpeedBonus(for: User.siri)
+            
+            cardsInPlay = cardsInPlay.filter({(card: Card) in
+                let matchFirst = card != foundSet.0
+                let matchSecond = card != foundSet.1
+                let matchThird = card != foundSet.2
+                
+                return matchFirst && matchSecond && matchThird
+            })
+
+            return true
+        } else {
+            return false
+        }
+    }
+    
     init() {
+        lastPlayerMoveTime = DispatchTime.now()
+        lastSiriMoveTime = DispatchTime.now()
+        
         createDeck()
         newGame()
     }

@@ -312,9 +312,13 @@ class CardView: UIView
             
             if selected {
                 #colorLiteral(red: 1, green: 0, blue: 0.8122541904, alpha: 1).setStroke()
-                base.lineWidth = 6.0
+                base.lineWidth = 10.0
                 base.stroke()
             }
+            
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).setStroke()
+            base.lineWidth = 4.0
+            base.stroke()
         } else {
             #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).setFill()
             base.fill()
