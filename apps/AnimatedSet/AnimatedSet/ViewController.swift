@@ -81,32 +81,22 @@ class ViewController: UIViewController
         }
     }
     
+    private func updateGrid() {
+        grid.frame = cardAreaView.bounds
+        grid.cellCount = game.playedCards.count
+    }
+    
     private func updateLayout() {
         deckArea.setNeedsLayout()
         deckArea.layoutIfNeeded()
         
-        let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
-        
-        for card in game.cardsInDeck {
-            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
-            
-            if let cardView = cardViews.first(where: { $0.card == card }) {
-                cardView.frame = initialFrame
-            }
-        }
-        
-        let discardFrame = cardAreaView.convert(discardView.frame, from: deckArea)
-        
-        for card in game.discardedCards {
-            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
-            
-            if let cardView = cardViews.first(where: { $0.card == card }) {
-                cardView.frame = discardFrame
-            }
-        }
-        
-        grid.frame = cardAreaView.bounds
-        grid.cellCount = game.playedCards.count
+        updatePlayedCardsLayout()
+        updateDeckLayout()
+        updateDiscardedCardsLayout()
+    }
+    
+    private func updatePlayedCardsLayout() {
+        updateGrid()
         
         for index in game.playedCards.indices {
             let card = game.playedCards[index]
@@ -119,32 +109,57 @@ class ViewController: UIViewController
             }
         }
     }
-
+    
+    private func updateDeckLayout() {
+        let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
+        
+        for card in game.cardsInDeck {
+            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
+            
+            if let cardView = cardViews.first(where: { $0.card == card }) {
+                cardView.frame = initialFrame
+            }
+        }
+    }
+    
+    private func updateDiscardedCardsLayout() {
+        let discardFrame = cardAreaView.convert(discardView.frame, from: deckArea)
+        
+        for card in game.discardedCards {
+            let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
+            
+            if let cardView = cardViews.first(where: { $0.card == card }) {
+                cardView.frame = discardFrame
+            }
+        }
+    }
     
     private func updateView() {
-        grid.frame = cardAreaView.bounds
-        grid.cellCount = game.playedCards.count
-        
+        updatePlayedCardsView()
+        updateDiscardedCardsView()
+    }
+    
+    private func updatePlayedCardsView() {
+        updateGrid()
+
         var newCardIndex = -1
         
         for index in game.playedCards.indices {
             let card = game.playedCards[index]
             let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
-
+            
             if let cardView = cardViews.first(where: { $0.card == card }) {
                 if game.selectedCards.contains(card) {
                     cardView.selected = true
                 } else {
                     cardView.selected = false
                 }
-                
-                cardAreaView.bringSubviewToFront(cardView)
-                
+
                 let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
                 
                 if cardView.frame == initialFrame {
                     newCardIndex += 1
-
+                    
                     Timer.scheduledTimer(
                         withTimeInterval: 0.4 * Double(newCardIndex),
                         repeats: false,
@@ -184,7 +199,9 @@ class ViewController: UIViewController
                 }
             }
         }
-        
+    }
+    
+    private func updateDiscardedCardsView() {
         for card in game.discardedCards {
             let cardViews = cardAreaView.subviews.compactMap { $0 as? CardView }
             
@@ -201,7 +218,7 @@ class ViewController: UIViewController
                             UIView.transition(
                                 with: cardView,
                                 duration: 1.0,
-                                options: [.transitionFlipFromTop],
+                                options: [.transitionFlipFromBottom],
                                 animations: {
                                     cardView.faceUp = false
                                 }
@@ -225,14 +242,12 @@ class ViewController: UIViewController
     @objc
     private func deal() {
         game.deal(thisMany: 3)
-        
         updateView()
     }
     
     @objc
     private func touchCard(sender: CardTapGestureRecognizer) {
         game.chooseCard(sender.card)
-        
         updateView()
     }
     

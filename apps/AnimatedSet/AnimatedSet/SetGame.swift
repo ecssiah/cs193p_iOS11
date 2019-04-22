@@ -30,6 +30,8 @@ struct SetGame
         selectedCards.removeAll()
         playedCards.removeAll()
         discardedCards.removeAll()
+        
+        deck.shuffle()
     }
     
     private func findSet() -> (Card, Card, Card)? {
@@ -71,6 +73,8 @@ struct SetGame
                 }
             }
         }
+        
+        deck.shuffle()
     }
     
     mutating func newGame() {
@@ -120,13 +124,11 @@ struct SetGame
     
     mutating func deal(thisMany numCards: Int) {
         for _ in 1...numCards {
-            if playedCards.count == deck.count {
+            if cardsInDeck.count == 0 {
                 break
             }
             
-            let card = cardsInDeck[Int(arc4random_uniform(UInt32(cardsInDeck.count)))]
-            
-            playedCards.append(card)
+            playedCards.append(cardsInDeck.last!)
         }
     }
     
