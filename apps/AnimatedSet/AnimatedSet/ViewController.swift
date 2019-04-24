@@ -46,11 +46,7 @@ class ViewController: UIViewController
     weak var discardView: UIView!
     
     @IBOutlet
-    weak var discardLabel: UILabel! {
-        didSet {
-            discardLabel.text = ""
-        }
-    }
+    weak var discardLabel: UILabel! { didSet { discardLabel.text = "" } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,13 +62,13 @@ class ViewController: UIViewController
         )
     }
     
+    override func viewDidLayoutSubviews() {
+        updateLayout()
+    }
+    
     private func startGame() {
         game.newGame()
         updateView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        updateLayout()
     }
     
     private func setupCardViews() {
@@ -96,9 +92,8 @@ class ViewController: UIViewController
     }
     
     private func updateLayout() {
-        deckArea.setNeedsLayout()
         deckArea.layoutIfNeeded()
-        
+
         updatePlayedCardsLayout()
         updateDeckLayout()
         updateDiscardedCardsLayout()
