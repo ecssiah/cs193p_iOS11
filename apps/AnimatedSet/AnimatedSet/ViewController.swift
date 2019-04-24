@@ -45,6 +45,13 @@ class ViewController: UIViewController
     @IBOutlet
     weak var discardView: UIView!
     
+    @IBOutlet
+    weak var discardLabel: UILabel! {
+        didSet {
+            discardLabel.text = ""
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,11 +60,13 @@ class ViewController: UIViewController
         Timer.scheduledTimer(
             withTimeInterval: 1.0,
             repeats: false,
-            block: startGame(timer:)
+            block: { timer in
+                self.startGame()
+            }
         )
     }
     
-    private func startGame(timer: Timer) {
+    private func startGame() {
         game.newGame()
         updateView()
     }
@@ -154,7 +163,7 @@ class ViewController: UIViewController
                 } else {
                     cardView.selected = false
                 }
-
+                
                 let initialFrame = cardAreaView.convert(deckView.frame, from: deckArea)
                 
                 if cardView.frame == initialFrame {
@@ -232,6 +241,9 @@ class ViewController: UIViewController
                         options: [],
                         animations: {
                             cardView.frame = discardFrame
+                        },
+                        completion: { position in
+                            self.updateMatchedSetLabel()
                         }
                     )
                 }
@@ -256,6 +268,22 @@ class ViewController: UIViewController
         if recognizer.state == .ended {
             game.shuffle()
             updateView()
+        }
+    }
+    
+    private func updateMatchedSetLabel() {
+        if game.matchedSets > 0 {
+            var matchedSetText = "\(game.matchedSets)"
+            
+            if game.matchedSets > 1 {
+                matchedSetText += " Sets"
+            } else {
+                matchedSetText += " Set"
+            }
+            
+            discardLabel.text = matchedSetText
+        } else {
+            discardLabel.text = ""
         }
     }
 }

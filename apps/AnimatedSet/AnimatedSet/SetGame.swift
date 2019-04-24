@@ -16,6 +16,8 @@ struct SetGame
     private(set) var discardedCards = [Card]()
     private(set) var selectedCards = [Card]()
     
+    private(set) var matchedSets = 0
+    
     var cardsInDeck: [Card] {
         return deck.filter {
             !playedCards.contains($0) && !discardedCards.contains($0)
@@ -102,7 +104,7 @@ struct SetGame
             third: selectedCards[2]
         )
         
-        if true || completeSet {
+        if completeSet {
             playedCards = playedCards.filter { card in
                 let matchFirst = card != selectedCards[0]
                 let matchSecond = card != selectedCards[1]
@@ -117,6 +119,8 @@ struct SetGame
             )
             
             deal(thisMany: 3)
+            
+            matchedSets += 1
         }
         
         selectedCards.removeAll()
@@ -124,7 +128,7 @@ struct SetGame
     
     mutating func deal(thisMany numCards: Int) {
         for _ in 1...numCards {
-            if cardsInDeck.count == 0 {
+            if cardsInDeck.isEmpty {
                 break
             }
             

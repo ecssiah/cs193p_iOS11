@@ -334,7 +334,7 @@ class CardView: UIView
         let path = UIBezierPath()
         path.lineWidth = 2.0
         
-        for pos in 0..<numLines {
+        for pos in 1...numLines {
             let curX = CGFloat(pos) * bounds.size.width / CGFloat(numLines)
             path.move(to: CGPoint(x: curX, y: 0))
             path.addLine(to: CGPoint(x: curX, y: bounds.size.height))
