@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B29AB182273B2F7001AB298 /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29AB172273B2F7001AB298 /* ConcentrationViewController.swift */; };
+		7B29AB1A2273B92F001AB298 /* ConcentrationThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29AB192273B92F001AB298 /* ConcentrationThemeChooserViewController.swift */; };
+		7B29AB1C2273B9E0001AB298 /* ConcentrationGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29AB1B2273B9E0001AB298 /* ConcentrationGame.swift */; };
+		7B29AB1E2273BA10001AB298 /* ConcentrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B29AB1D2273BA10001AB298 /* ConcentrationCard.swift */; };
 		7BE2B0892272150E004EB4E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2B0882272150E004EB4E8 /* AppDelegate.swift */; };
 		7BE2B08E2272150E004EB4E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE2B08C2272150E004EB4E8 /* Main.storyboard */; };
 		7BE2B0902272150F004EB4E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE2B08F2272150F004EB4E8 /* Assets.xcassets */; };
 		7BE2B0932272150F004EB4E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE2B0912272150F004EB4E8 /* LaunchScreen.storyboard */; };
 		7BFD862F227225A300777DF6 /* ArcadeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD862E227225A300777DF6 /* ArcadeTabBarViewController.swift */; };
 		7BFD86312272260E00777DF6 /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD86302272260E00777DF6 /* SetViewController.swift */; };
+		7BFD863D2272299900777DF6 /* SetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD863A2272299900777DF6 /* SetCard.swift */; };
+		7BFD863E2272299900777DF6 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD863B2272299900777DF6 /* Grid.swift */; };
+		7BFD863F2272299900777DF6 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD863C2272299900777DF6 /* SetGame.swift */; };
+		7BFD8641227229A900777DF6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD8640227229A900777DF6 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B29AB172273B2F7001AB298 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
+		7B29AB192273B92F001AB298 /* ConcentrationThemeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooserViewController.swift; sourceTree = "<group>"; };
+		7B29AB1B2273B9E0001AB298 /* ConcentrationGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationGame.swift; sourceTree = "<group>"; };
+		7B29AB1D2273BA10001AB298 /* ConcentrationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationCard.swift; sourceTree = "<group>"; };
 		7BE2B0852272150E004EB4E8 /* Arcade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Arcade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE2B0882272150E004EB4E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE2B08D2272150E004EB4E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -24,6 +36,10 @@
 		7BE2B0942272150F004EB4E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BFD862E227225A300777DF6 /* ArcadeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeTabBarViewController.swift; sourceTree = "<group>"; };
 		7BFD86302272260E00777DF6 /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
+		7BFD863A2272299900777DF6 /* SetCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCard.swift; sourceTree = "<group>"; };
+		7BFD863B2272299900777DF6 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		7BFD863C2272299900777DF6 /* SetGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		7BFD8640227229A900777DF6 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +87,8 @@
 		7BFD862A2272251B00777DF6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7BFD86372272291300777DF6 /* Concentration */,
+				7BFD86362272290E00777DF6 /* Set */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -78,8 +96,9 @@
 		7BFD862C2272254300777DF6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7BFD86332272288800777DF6 /* Concentration */,
+				7BFD86322272288000777DF6 /* Set */,
 				7BFD862E227225A300777DF6 /* ArcadeTabBarViewController.swift */,
-				7BFD86302272260E00777DF6 /* SetViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -87,8 +106,61 @@
 		7BFD862D2272255A00777DF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BFD86382272292600777DF6 /* Concentration */,
+				7BFD86392272292D00777DF6 /* Set */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7BFD86322272288000777DF6 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				7BFD86302272260E00777DF6 /* SetViewController.swift */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		7BFD86332272288800777DF6 /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+				7B29AB172273B2F7001AB298 /* ConcentrationViewController.swift */,
+				7B29AB192273B92F001AB298 /* ConcentrationThemeChooserViewController.swift */,
+			);
+			path = Concentration;
+			sourceTree = "<group>";
+		};
+		7BFD86362272290E00777DF6 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				7BFD863A2272299900777DF6 /* SetCard.swift */,
+				7BFD863B2272299900777DF6 /* Grid.swift */,
+				7BFD863C2272299900777DF6 /* SetGame.swift */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		7BFD86372272291300777DF6 /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+				7B29AB1B2273B9E0001AB298 /* ConcentrationGame.swift */,
+				7B29AB1D2273BA10001AB298 /* ConcentrationCard.swift */,
+			);
+			path = Concentration;
+			sourceTree = "<group>";
+		};
+		7BFD86382272292600777DF6 /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Concentration;
+			sourceTree = "<group>";
+		};
+		7BFD86392272292D00777DF6 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				7BFD8640227229A900777DF6 /* CardView.swift */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,9 +234,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BFD8641227229A900777DF6 /* CardView.swift in Sources */,
 				7BFD862F227225A300777DF6 /* ArcadeTabBarViewController.swift in Sources */,
 				7BFD86312272260E00777DF6 /* SetViewController.swift in Sources */,
 				7BE2B0892272150E004EB4E8 /* AppDelegate.swift in Sources */,
+				7B29AB1A2273B92F001AB298 /* ConcentrationThemeChooserViewController.swift in Sources */,
+				7BFD863E2272299900777DF6 /* Grid.swift in Sources */,
+				7BFD863F2272299900777DF6 /* SetGame.swift in Sources */,
+				7B29AB1C2273B9E0001AB298 /* ConcentrationGame.swift in Sources */,
+				7B29AB182273B2F7001AB298 /* ConcentrationViewController.swift in Sources */,
+				7BFD863D2272299900777DF6 /* SetCard.swift in Sources */,
+				7B29AB1E2273BA10001AB298 /* ConcentrationCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
