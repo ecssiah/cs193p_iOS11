@@ -52,9 +52,7 @@ class SetViewController: UIViewController
         Timer.scheduledTimer(
             withTimeInterval: 1.0,
             repeats: false,
-            block: { timer in
-                self.startGame()
-            }
+            block: { timer in self.startGame() }
         )
     }
     
@@ -170,9 +168,9 @@ class SetViewController: UIViewController
                                 options: [.transitionFlipFromTop],
                                 animations: {
                                     cardView.faceUp = true
-                            }
+                                }
                             )
-                    }
+                        }
                     )
                     
                     if let frame = grid[index] {
@@ -182,7 +180,7 @@ class SetViewController: UIViewController
                             options: [],
                             animations: {
                                 cardView.frame = frame.insetBy(dx: CardView.inset, dy: CardView.inset)
-                        }
+                            }
                         )
                     }
                 } else {
@@ -193,7 +191,7 @@ class SetViewController: UIViewController
                             options: [],
                             animations: {
                                 cardView.frame = frame.insetBy(dx: CardView.inset, dy: CardView.inset)
-                        }
+                            }
                         )
                     }
                 }
@@ -221,9 +219,9 @@ class SetViewController: UIViewController
                                 options: [.transitionFlipFromBottom],
                                 animations: {
                                     cardView.faceUp = false
-                            }
+                                }
                             )
-                    }
+                        }
                     )
                     
                     UIViewPropertyAnimator.runningPropertyAnimator(
@@ -232,10 +230,10 @@ class SetViewController: UIViewController
                         options: [],
                         animations: {
                             cardView.frame = discardFrame
-                    },
+                        },
                         completion: { position in
                             self.updateMatchedSetLabel()
-                    }
+                        }
                     )
                 }
             }
