@@ -24,7 +24,7 @@ class ConcentrationThemeViewController: UIViewController, UISplitViewControllerD
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,
         onto primaryViewController: UIViewController
-        ) -> Bool {
+    ) -> Bool {
         if let cvc = secondaryViewController as? ConcentrationViewController {
             if cvc.theme == nil {
                 return true
