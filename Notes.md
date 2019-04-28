@@ -1,7 +1,7 @@
 # View Controller Lifecycle
 
   1. Instantiated
-  2. `awakeFromNi` (only if instantiated from storyboard)
+  2. `awakeFromNib` (only if instantiated from storyboard)
   3. Segue preparation
   4. Outlets set
   5. `viewDidLoad`
@@ -67,3 +67,18 @@ allow the app to lower its memory footprint
   - Called before outlets are set and segues are prepared
   - Prefer the View Controller lifecycle methods
   - Primarily for code that needs to execute very early
+
+# Scroll View
+
+A view that allows the user to scroll/pan a viewport around a view larger than
+the current screen
+
+## Adding subviews to a UIScrollView
+
+```swift
+scrollView.contentSize = CGSize(width: 3000, height: 2000)
+logo.frame = CGRect(x: 2700, y: 50, width: 120, height: 180)
+scrollView.addSubview(logo)
+```
+  
+
