@@ -16,6 +16,19 @@ class ConcentrationViewController: UIViewController
         return (cardButtons.count + 1) / 2
     }
     
+    var theme: String? {
+        didSet {
+            emoji = [:]
+            emojiChoices = theme ?? ""
+            
+            updateViewFromModel()
+        }
+    }
+
+    private var emojiChoices = ""
+    
+    private var emoji = [ConcentrationCard:String]()
+    
     private(set) var flipCount = 0 {
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
@@ -45,27 +58,14 @@ class ConcentrationViewController: UIViewController
                 
                 if card.isFaceUp {
                     button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                    button.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+                    button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 } else {
                     button.setTitle("", for: UIControl.State.normal)
-                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 0, green: 0.2508557439, blue: 0.3284637332, alpha: 0) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 0, green: 0.2508557439, blue: 0.3284637332, alpha: 0) : #colorLiteral(red: 0.6666666667, green: 0.6666666667, blue: 0.6666666667, alpha: 1)
                 }
             }
         }
     }
-    
-    var theme: String? {
-        didSet {
-            emojiChoices = theme ?? ""
-            emoji = [:]
-            
-            updateViewFromModel()
-        }
-    }
-    
-    private var emojiChoices = "💐🌷🌹🥀🌺🌸🌼🌻"
-    
-    private var emoji = [ConcentrationCard:String]()
     
     private func emoji(for card: ConcentrationCard) -> String {
         if emoji[card] == nil, emojiChoices.count > 0 {
