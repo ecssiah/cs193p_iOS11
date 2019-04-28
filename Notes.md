@@ -14,13 +14,15 @@ Always call super during lifecycle methods
   - Called every time controller becomes visible
 
 `viewDidAppear`:
+    ```
+    override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+
+      ...
+    }
+    ```
+
   - Start observing something like GPS position
+  - Useful for starting expensive procedures that shouldn't run until visible
 
-  ```
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    ...
-  }
-  ```
 
