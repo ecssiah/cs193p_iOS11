@@ -81,4 +81,49 @@ logo.frame = CGRect(x: 2700, y: 50, width: 120, height: 180)
 scrollView.addSubview(logo)
 ```
   
+The view can be scrolled programatically:
+
+```swift
+func scrollRectToVisible(CGRect, animated: Bool)
+```
+
+The `contentSize` can also be zoomed. This requires the minimum and maximum zoom
+scales to be set
+
+```swift
+scrollView.minimumZoomScale = 0.5
+scrollView.maximumZoomScale = 2.0
+```
+
+Zooming also requires a delegate method to specificy which subview will be 
+scaled
+
+```swift
+func viewForZooming(in scrollView: UIScrollView) -> UIView
+```
+
+The view can be zoomed programatically:
+
+```swift
+var zoomScale: CGFloat
+func setZoomScale(CGFloat, animated: Bool)
+func zoom(to rect: CGRect, animated: Bool)
+```
+
+UIScrollView has a number of delegate methods that provide information
+
+```swift
+scrollViewDidEndZooming(
+  UIScrollView,
+  with view: UIView,
+  atScale: CGFloat
+)
+```
+
+This could be used to increase resolution after the user zooms past a certain
+scale. If this is done, then the transform will usually be set back to the 
+identity matrix.
+
+
+
 
