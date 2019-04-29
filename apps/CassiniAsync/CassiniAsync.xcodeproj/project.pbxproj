@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B4D75272276BB2B00325BDB /* DemoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D75262276BB2B00325BDB /* DemoURLs.swift */; };
-		7B4D752B2276BC2D00325BDB /* oval.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7B4D752A2276BC2D00325BDB /* oval.jpg */; };
-		7BC3413322764E1300BFBE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC3413222764E1300BFBE1D /* AppDelegate.swift */; };
-		7BC3413822764E1300BFBE1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC3413622764E1300BFBE1D /* Main.storyboard */; };
-		7BC3413A22764E1600BFBE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BC3413922764E1600BFBE1D /* Assets.xcassets */; };
-		7BC3413D22764E1600BFBE1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC3413B22764E1600BFBE1D /* LaunchScreen.storyboard */; };
-		7BC3414522764F1600BFBE1D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC3414422764F1600BFBE1D /* ImageViewController.swift */; };
+		7B8B283922778DB200D83140 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B283822778DB200D83140 /* AppDelegate.swift */; };
+		7B8B283E22778DB200D83140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B8B283C22778DB200D83140 /* Main.storyboard */; };
+		7B8B284022778DB400D83140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8B283F22778DB400D83140 /* Assets.xcassets */; };
+		7B8B284322778DB400D83140 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B8B284122778DB400D83140 /* LaunchScreen.storyboard */; };
+		7B8B284D22778E9100D83140 /* CassiniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B284A22778E9100D83140 /* CassiniViewController.swift */; };
+		7B8B284E22778E9100D83140 /* DemoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B284B22778E9100D83140 /* DemoURLs.swift */; };
+		7B8B284F22778E9100D83140 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B284C22778E9100D83140 /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7B4D75262276BB2B00325BDB /* DemoURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoURLs.swift; sourceTree = "<group>"; };
-		7B4D752A2276BC2D00325BDB /* oval.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = oval.jpg; sourceTree = "<group>"; };
-		7BC3412F22764E1300BFBE1D /* CassiniMultiThread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CassiniMultiThread.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BC3413222764E1300BFBE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7BC3413722764E1300BFBE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7BC3413922764E1600BFBE1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7BC3413C22764E1600BFBE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7BC3413E22764E1600BFBE1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BC3414422764F1600BFBE1D /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		7B8B283522778DB200D83140 /* CassiniAsync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CassiniAsync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B8B283822778DB200D83140 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7B8B283D22778DB200D83140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7B8B283F22778DB400D83140 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7B8B284222778DB400D83140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7B8B284422778DB400D83140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B8B284A22778E9100D83140 /* CassiniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CassiniViewController.swift; sourceTree = "<group>"; };
+		7B8B284B22778E9100D83140 /* DemoURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoURLs.swift; sourceTree = "<group>"; };
+		7B8B284C22778E9100D83140 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7BC3412C22764E1300BFBE1D /* Frameworks */ = {
+		7B8B283222778DB200D83140 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,73 +39,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7BC3412622764E1300BFBE1D = {
+		7B8B282C22778DB200D83140 = {
 			isa = PBXGroup;
 			children = (
-				7BC3413122764E1300BFBE1D /* Cassini */,
-				7BC3413022764E1300BFBE1D /* Products */,
+				7B8B283722778DB200D83140 /* CassiniAsync */,
+				7B8B283622778DB200D83140 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7BC3413022764E1300BFBE1D /* Products */ = {
+		7B8B283622778DB200D83140 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BC3412F22764E1300BFBE1D /* CassiniMultiThread.app */,
+				7B8B283522778DB200D83140 /* CassiniAsync.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7BC3413122764E1300BFBE1D /* Cassini */ = {
+		7B8B283722778DB200D83140 /* CassiniAsync */ = {
 			isa = PBXGroup;
 			children = (
-				7BC3413222764E1300BFBE1D /* AppDelegate.swift */,
-				7BC3413622764E1300BFBE1D /* Main.storyboard */,
-				7BC3414422764F1600BFBE1D /* ImageViewController.swift */,
-				7B4D75262276BB2B00325BDB /* DemoURLs.swift */,
-				7BC3413B22764E1600BFBE1D /* LaunchScreen.storyboard */,
-				7BC3413922764E1600BFBE1D /* Assets.xcassets */,
-				7B4D752A2276BC2D00325BDB /* oval.jpg */,
-				7BC3413E22764E1600BFBE1D /* Info.plist */,
+				7B8B284A22778E9100D83140 /* CassiniViewController.swift */,
+				7B8B284B22778E9100D83140 /* DemoURLs.swift */,
+				7B8B284C22778E9100D83140 /* ImageViewController.swift */,
+				7B8B283822778DB200D83140 /* AppDelegate.swift */,
+				7B8B283C22778DB200D83140 /* Main.storyboard */,
+				7B8B283F22778DB400D83140 /* Assets.xcassets */,
+				7B8B284122778DB400D83140 /* LaunchScreen.storyboard */,
+				7B8B284422778DB400D83140 /* Info.plist */,
 			);
-			path = Cassini;
+			path = CassiniAsync;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7BC3412E22764E1300BFBE1D /* CassiniMultiThread */ = {
+		7B8B283422778DB200D83140 /* CassiniAsync */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BC3414122764E1600BFBE1D /* Build configuration list for PBXNativeTarget "CassiniMultiThread" */;
+			buildConfigurationList = 7B8B284722778DB400D83140 /* Build configuration list for PBXNativeTarget "CassiniAsync" */;
 			buildPhases = (
-				7BC3412B22764E1300BFBE1D /* Sources */,
-				7BC3412C22764E1300BFBE1D /* Frameworks */,
-				7BC3412D22764E1300BFBE1D /* Resources */,
+				7B8B283122778DB200D83140 /* Sources */,
+				7B8B283222778DB200D83140 /* Frameworks */,
+				7B8B283322778DB200D83140 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CassiniMultiThread;
-			productName = Cassini;
-			productReference = 7BC3412F22764E1300BFBE1D /* CassiniMultiThread.app */;
+			name = CassiniAsync;
+			productName = CassiniAsync;
+			productReference = 7B8B283522778DB200D83140 /* CassiniAsync.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7BC3412722764E1300BFBE1D /* Project object */ = {
+		7B8B282D22778DB200D83140 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Gauge Structures";
 				TargetAttributes = {
-					7BC3412E22764E1300BFBE1D = {
+					7B8B283422778DB200D83140 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
 			};
-			buildConfigurationList = 7BC3412A22764E1300BFBE1D /* Build configuration list for PBXProject "CassiniMultiThread" */;
+			buildConfigurationList = 7B8B283022778DB200D83140 /* Build configuration list for PBXProject "CassiniAsync" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -113,56 +113,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 7BC3412622764E1300BFBE1D;
-			productRefGroup = 7BC3413022764E1300BFBE1D /* Products */;
+			mainGroup = 7B8B282C22778DB200D83140;
+			productRefGroup = 7B8B283622778DB200D83140 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7BC3412E22764E1300BFBE1D /* CassiniMultiThread */,
+				7B8B283422778DB200D83140 /* CassiniAsync */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7BC3412D22764E1300BFBE1D /* Resources */ = {
+		7B8B283322778DB200D83140 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BC3413D22764E1600BFBE1D /* LaunchScreen.storyboard in Resources */,
-				7B4D752B2276BC2D00325BDB /* oval.jpg in Resources */,
-				7BC3413A22764E1600BFBE1D /* Assets.xcassets in Resources */,
-				7BC3413822764E1300BFBE1D /* Main.storyboard in Resources */,
+				7B8B284322778DB400D83140 /* LaunchScreen.storyboard in Resources */,
+				7B8B284022778DB400D83140 /* Assets.xcassets in Resources */,
+				7B8B283E22778DB200D83140 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7BC3412B22764E1300BFBE1D /* Sources */ = {
+		7B8B283122778DB200D83140 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BC3414522764F1600BFBE1D /* ImageViewController.swift in Sources */,
-				7BC3413322764E1300BFBE1D /* AppDelegate.swift in Sources */,
-				7B4D75272276BB2B00325BDB /* DemoURLs.swift in Sources */,
+				7B8B283922778DB200D83140 /* AppDelegate.swift in Sources */,
+				7B8B284D22778E9100D83140 /* CassiniViewController.swift in Sources */,
+				7B8B284F22778E9100D83140 /* ImageViewController.swift in Sources */,
+				7B8B284E22778E9100D83140 /* DemoURLs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7BC3413622764E1300BFBE1D /* Main.storyboard */ = {
+		7B8B283C22778DB200D83140 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7BC3413722764E1300BFBE1D /* Base */,
+				7B8B283D22778DB200D83140 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		7BC3413B22764E1600BFBE1D /* LaunchScreen.storyboard */ = {
+		7B8B284122778DB400D83140 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7BC3413C22764E1600BFBE1D /* Base */,
+				7B8B284222778DB400D83140 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7BC3413F22764E1600BFBE1D /* Debug */ = {
+		7B8B284522778DB400D83140 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -231,7 +231,7 @@
 			};
 			name = Debug;
 		};
-		7BC3414022764E1600BFBE1D /* Release */ = {
+		7B8B284622778DB400D83140 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -286,36 +286,36 @@
 			};
 			name = Release;
 		};
-		7BC3414222764E1600BFBE1D /* Debug */ = {
+		7B8B284822778DB400D83140 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKWB93NN4T;
-				INFOPLIST_FILE = Cassini/Info.plist;
+				INFOPLIST_FILE = CassiniAsync/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.Cassini;
+				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.CassiniAsync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		7BC3414322764E1600BFBE1D /* Release */ = {
+		7B8B284922778DB400D83140 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKWB93NN4T;
-				INFOPLIST_FILE = Cassini/Info.plist;
+				INFOPLIST_FILE = CassiniAsync/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.Cassini;
+				PRODUCT_BUNDLE_IDENTIFIER = org.gauge.structures.CassiniAsync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,25 +325,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7BC3412A22764E1300BFBE1D /* Build configuration list for PBXProject "CassiniMultiThread" */ = {
+		7B8B283022778DB200D83140 /* Build configuration list for PBXProject "CassiniAsync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BC3413F22764E1600BFBE1D /* Debug */,
-				7BC3414022764E1600BFBE1D /* Release */,
+				7B8B284522778DB400D83140 /* Debug */,
+				7B8B284622778DB400D83140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7BC3414122764E1600BFBE1D /* Build configuration list for PBXNativeTarget "CassiniMultiThread" */ = {
+		7B8B284722778DB400D83140 /* Build configuration list for PBXNativeTarget "CassiniAsync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BC3414222764E1600BFBE1D /* Debug */,
-				7BC3414322764E1600BFBE1D /* Release */,
+				7B8B284822778DB400D83140 /* Debug */,
+				7B8B284922778DB400D83140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7BC3412722764E1300BFBE1D /* Project object */;
+	rootObject = 7B8B282D22778DB200D83140 /* Project object */;
 }

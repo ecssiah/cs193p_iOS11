@@ -42,6 +42,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate
     
     var imageView = UIImageView()
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.minimumZoomScale = 1/25
@@ -70,8 +72,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if imageURL == nil {
-            imageURL = DemoURLs.stanford
-        }
+//        if imageURL == nil {
+//            imageURL = DemoURLs.stanford
+//        }
     }
 }
