@@ -124,6 +124,56 @@ This could be used to increase resolution after the user zooms past a certain
 scale. If this is done, then the transform will usually be set back to the 
 identity matrix.
 
+# Multithreading
+
+iOS multithreading utilizes 'queues' of functions (often closures). They can 
+either be executed in serial or concurrently.
+
+## Main Queue
+
+All UI activity is run in the "main queue", so heavy non-UI processes must be 
+kept out of this queue to avoid freezing the UI.
+
+Accessing the main queue:
+
+```swift
+let mainQueue = DispatchQueue.main
+```
+
+## Global Queues
+
+There are four global queues available based on their 'quality of service'.
+
+```swift
+let backgroundQueue = DispatchQueue.global(qos: DispatchQoS)
+
+DispatchQoS.userInteractive // high priority, short and quick tasks
+DispatchQoS.userInitiated   // high priority, normal tasks
+DispatchQoS.background      // not directly initiated by user, long tasks
+DispatchQoS.utility         // low priority, long-running background tasks
+```
+
+## Adding to a Queue
+
+To add a function while continuing to run the current queue:
+
+```swift
+queue.async { ... }
+```
+
+To add a function and block the current queue until it is completed:
+
+```swift
+queue.sync { ... }
+```
+
+## Multithreaded iOS API
+
+iOS will often run processes off the main queue and offer the developer the
+option to run a closure that will execute off the main queue.
+
+__It is important to dispatch any UI work back to the main queue in these 
+closures__
 
 
 
