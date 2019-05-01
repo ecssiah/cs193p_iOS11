@@ -78,37 +78,44 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbH-It-Oso">
                                 <rect key="frame" x="0.0" y="24" width="818.5" height="790"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOQ-Tl-Q7s" customClass="EmojiArtView" customModule="EmojiArt" customModuleProvider="target">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcP-Ql-rRK">
                                         <rect key="frame" x="0.0" y="0.0" width="818.5" height="790"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="250" constant="818.5" id="dVd-ba-af5"/>
+                                            <constraint firstAttribute="height" priority="250" constant="790" id="kZu-sC-YmF"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="zOQ-Tl-Q7s" secondAttribute="bottom" id="F9w-ri-tZ9"/>
-                                    <constraint firstItem="zOQ-Tl-Q7s" firstAttribute="leading" secondItem="PbH-It-Oso" secondAttribute="leading" id="i27-5s-DH1"/>
-                                    <constraint firstAttribute="trailing" secondItem="zOQ-Tl-Q7s" secondAttribute="trailing" id="sw2-QP-AIu"/>
-                                    <constraint firstItem="zOQ-Tl-Q7s" firstAttribute="top" secondItem="PbH-It-Oso" secondAttribute="top" id="vRd-iN-FlK"/>
+                                    <constraint firstItem="lcP-Ql-rRK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PbH-It-Oso" secondAttribute="top" id="2YN-sz-QAo"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lcP-Ql-rRK" secondAttribute="bottom" id="7Vg-ff-usq"/>
+                                    <constraint firstItem="lcP-Ql-rRK" firstAttribute="centerY" secondItem="PbH-It-Oso" secondAttribute="centerY" id="H5f-Tv-oJg"/>
+                                    <constraint firstItem="lcP-Ql-rRK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PbH-It-Oso" secondAttribute="leading" id="OEq-us-N9a"/>
+                                    <constraint firstItem="lcP-Ql-rRK" firstAttribute="centerX" secondItem="PbH-It-Oso" secondAttribute="centerX" id="xTa-WU-zRl"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lcP-Ql-rRK" secondAttribute="trailing" id="zew-Po-oOv"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="PbH-It-Oso" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bkr-u0-d5R"/>
-                            <constraint firstItem="PbH-It-Oso" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Y2R-ws-0ZX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PbH-It-Oso" secondAttribute="bottom" id="eXP-gr-C8H"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PbH-It-Oso" secondAttribute="trailing" id="hQ4-hh-ZsM"/>
+                            <constraint firstItem="PbH-It-Oso" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="A56-HS-K9G"/>
+                            <constraint firstItem="PbH-It-Oso" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OXn-FX-zdh"/>
+                            <constraint firstItem="PbH-It-Oso" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SaA-8G-Mum"/>
+                            <constraint firstItem="PbH-It-Oso" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bB4-Ld-g4M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="dropZone" destination="PbH-It-Oso" id="ZfH-F8-TYJ"/>
-                        <outlet property="emojiArtView" destination="zOQ-Tl-Q7s" id="vff-x9-Qtc"/>
+                        <outlet property="scrollView" destination="lcP-Ql-rRK" id="ymV-vf-IR1"/>
+                        <outlet property="scrollViewHeight" destination="kZu-sC-YmF" id="T4J-Us-y64"/>
+                        <outlet property="scrollViewWidth" destination="dVd-ba-af5" id="a8z-Pa-KLv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-334" y="540"/>
+            <point key="canvasLocation" x="-334.1708542713568" y="539.56834532374103"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z4P-FM-Brd">
