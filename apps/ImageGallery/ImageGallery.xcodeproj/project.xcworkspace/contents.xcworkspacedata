@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ImageGallery.xcodeproj">
+      location = "group:/Users/michaelchapman/Development/cs193p_iOS11/apps/ImageGallery/ImageGallery/Utilities.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
